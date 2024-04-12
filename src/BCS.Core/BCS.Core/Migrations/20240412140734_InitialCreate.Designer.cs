@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BCS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240412105616_InitialCreate")]
+    [Migration("20240412140734_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -50,10 +50,6 @@ namespace BCS.Core.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -72,10 +68,6 @@ namespace BCS.Core.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")

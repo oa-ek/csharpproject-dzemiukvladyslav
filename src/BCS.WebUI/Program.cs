@@ -1,6 +1,8 @@
 using BCS.Core;
 using BCS.Core.Context;
 using BCS.Core.Entities;
+using BCS.Repositories;
+using BCS.WebUI.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRepositories();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
 
