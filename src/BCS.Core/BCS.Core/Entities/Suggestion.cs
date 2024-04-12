@@ -7,7 +7,7 @@ namespace BCS.Core.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppUser User { get; set; }
         public Guid TypeId { get; set; }
         public virtual Type Type { get; set; }
         public string Text { get; set; }
@@ -18,7 +18,7 @@ namespace BCS.Core.Entities
         public virtual City City { get; set; }
         public Guid StreetId { get; set; }
         public virtual Street Street { get; set; }
-        public string Number { get; set; }
-        public string Photo { get; set; }
+        public string? Number { get; set; }
+        public string? Photo { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BCS.Core.Entities
 {
     [Table("users")]
-    public class User : IdentityUser<Guid>, IBaseEntity<Guid>
+    public class AppUser : IdentityUser
     {
         //public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
