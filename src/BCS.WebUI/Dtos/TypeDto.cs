@@ -10,4 +10,16 @@
         public Guid Id { get; set; }
         public string Title { get; set; }
     }
+
+
+    public class StatusCreateDto
+    {
+        public string Title { get; set; }
+    }
+
+    public class StatusUpdateDto
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+    }
 }
