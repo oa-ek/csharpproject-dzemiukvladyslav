@@ -22,4 +22,15 @@
         public Guid Id { get; set; }
         public string Title { get; set; }
     }
+
+    public class CityCreateDto
+    {
+        public string Title { get; set; }
+    }
+
+    public class CityUpdateDto
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+    }
 }
