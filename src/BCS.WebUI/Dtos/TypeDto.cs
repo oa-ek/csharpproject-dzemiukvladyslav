@@ -33,4 +33,15 @@
         public Guid Id { get; set; }
         public string Title { get; set; }
     }
+
+    public class StreetCreateDto
+    {
+        public string Title { get; set; }
+    }
+
+    public class StreetUpdateDto
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+    }
 }

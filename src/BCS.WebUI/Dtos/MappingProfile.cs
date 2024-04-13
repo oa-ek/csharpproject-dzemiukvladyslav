@@ -14,6 +14,9 @@ namespace BCS.WebUI.Dtos
 
             CreateMap<CityCreateDto, Core.Entities.City>();
             CreateMap<CityUpdateDto, Core.Entities.City>();
+
+            CreateMap<StreetCreateDto, Core.Entities.Street>();
+            CreateMap<StreetUpdateDto, Core.Entities.Street>();
         }
     }
 }
