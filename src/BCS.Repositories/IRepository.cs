@@ -4,6 +4,7 @@ namespace BCS.Repositories
 {
     public interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
+
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> GetAllByUserAsync(AppUser user);
         Task<TEntity> GetAsync(TKey id);

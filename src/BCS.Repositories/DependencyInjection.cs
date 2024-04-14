@@ -1,4 +1,5 @@
 ﻿using BCS.Repositories.Cityes;
+using BCS.Repositories.Complaints;
 using BCS.Repositories.Statuses;
 using BCS.Repositories.Streets;
 using BCS.Repositories.Types;
@@ -14,6 +15,7 @@ namespace BCS.Repositories
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IStreetRepository, StreetRepository>();
+            services.AddScoped<IComplaintRepository, ComplaintRepository>();
             return services;
         }
     }

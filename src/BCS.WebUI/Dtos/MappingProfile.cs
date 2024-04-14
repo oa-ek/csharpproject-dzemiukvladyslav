@@ -17,6 +17,9 @@ namespace BCS.WebUI.Dtos
 
             CreateMap<StreetCreateDto, Core.Entities.Street>();
             CreateMap<StreetUpdateDto, Core.Entities.Street>();
+
+            CreateMap<ComplaintCreateDto, Core.Entities.Complaint>();
+            CreateMap<ComplaintUpdateDto, Core.Entities.Complaint>();
         }
     }
 }

@@ -26,4 +26,8 @@
     <ProjectReference Include="..\BCS.Repositories\BCS.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\data\img\" />
+  </ItemGroup>
+
 </Project>

@@ -8,12 +8,10 @@ namespace BCS.Repositories
     where TEntity : class, IBaseEntity<TKey>
     {
         protected DataContext _context;
-        //protected DbSet<TEntity> dbSet;
 
         public Repository(DataContext context)
         {
             _context = context;
-            //dbSet = _context.Set<TEntity>();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await _context.Set<TEntity>().ToListAsync();

@@ -6,8 +6,6 @@ using BCS.WebUI.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Add services to the container.
 builder.Services.AddCore(builder.Configuration);
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

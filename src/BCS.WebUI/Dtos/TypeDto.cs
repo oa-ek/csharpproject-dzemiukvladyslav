@@ -44,4 +44,30 @@
         public Guid Id { get; set; }
         public string Title { get; set; }
     }
+    public class ComplaintCreateDto
+    {
+        public Guid UserId { get; set; }
+        public Guid TypeId { get; set; }
+        public string Text { get; set; }
+        public DateTime Sdatetime { get; set; }
+        public Guid StatusId { get; set; }
+        public Guid CityId { get; set; }
+        public Guid StreetId { get; set; }
+        public string? Number { get; set; }
+        public IFormFile? Photo { get; set; }
+    }
+
+    public class ComplaintUpdateDto
+    {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid TypeId { get; set; }
+        public string Text { get; set; }
+        public string Sdatetime { get; set; }
+        public Guid StatusId { get; set; }
+        public Guid CityId { get; set; }
+        public Guid StreetId { get; set; }
+        public string? Number { get; set; }
+        public IFormFile? Photo { get; set; }
+    }
 }
