@@ -70,4 +70,31 @@
         public string? Number { get; set; }
         public IFormFile? Photo { get; set; }
     }
+
+    public class SuggestionCreateDto
+    {
+        public Guid UserId { get; set; }
+        public Guid TypeId { get; set; }
+        public string Text { get; set; }
+        public DateTime Sdatetime { get; set; }
+        public Guid StatusId { get; set; }
+        public Guid CityId { get; set; }
+        public Guid StreetId { get; set; }
+        public string? Number { get; set; }
+        public IFormFile? Photo { get; set; }
+    }
+
+    public class SuggestionUpdateDto
+    {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid TypeId { get; set; }
+        public string Text { get; set; }
+        public string Sdatetime { get; set; }
+        public Guid StatusId { get; set; }
+        public Guid CityId { get; set; }
+        public Guid StreetId { get; set; }
+        public string? Number { get; set; }
+        public IFormFile? Photo { get; set; }
+    }
 }

@@ -20,6 +20,9 @@ namespace BCS.WebUI.Dtos
 
             CreateMap<ComplaintCreateDto, Core.Entities.Complaint>();
             CreateMap<ComplaintUpdateDto, Core.Entities.Complaint>();
+
+            CreateMap<SuggestionCreateDto, Core.Entities.Suggestion>();
+            CreateMap<SuggestionUpdateDto, Core.Entities.Suggestion>();
         }
     }
 }

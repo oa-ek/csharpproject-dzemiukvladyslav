@@ -2,6 +2,7 @@
 using BCS.Repositories.Complaints;
 using BCS.Repositories.Statuses;
 using BCS.Repositories.Streets;
+using BCS.Repositories.Suggestions;
 using BCS.Repositories.Types;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,7 @@ namespace BCS.Repositories
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IStreetRepository, StreetRepository>();
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
+            services.AddScoped<ISuggestionRepository, SuggestionRepository>();
             return services;
         }
     }
