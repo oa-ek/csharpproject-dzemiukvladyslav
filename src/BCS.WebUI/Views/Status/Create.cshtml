@@ -1,0 +1,26 @@
+﻿@model BCS.Core.Entities.Status
+
+@{
+    ViewData["Title"] = "Створити новий статус";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+                <form asp-action="Create">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Назва</label>
+                        <input asp-for="Title" class="form-control" id="title" placeholder="Введіть новий статус">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Створити</button>
+                        <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
