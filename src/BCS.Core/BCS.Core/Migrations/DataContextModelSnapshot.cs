@@ -24,8 +24,9 @@ namespace BCS.Core.Migrations
 
             modelBuilder.Entity("BCS.Core.Entities.AppUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -125,6 +126,9 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("StreetId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("StructureId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -135,9 +139,6 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -146,11 +147,44 @@ namespace BCS.Core.Migrations
 
                     b.HasIndex("StreetId");
 
+                    b.HasIndex("StructureId");
+
                     b.HasIndex("TypeId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("complaints");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.ComplaintComments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("ComCommentData")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ComCommentPhoto")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("ComplaintId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComplaintId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("complaintComments");
                 });
 
             modelBuilder.Entity("BCS.Core.Entities.Status", b =>
@@ -183,6 +217,21 @@ namespace BCS.Core.Migrations
                     b.ToTable("street");
                 });
 
+            modelBuilder.Entity("BCS.Core.Entities.Structure", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("structure");
+                });
+
             modelBuilder.Entity("BCS.Core.Entities.Suggestion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -207,6 +256,9 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("StreetId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("StructureId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -217,9 +269,6 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -228,11 +277,44 @@ namespace BCS.Core.Migrations
 
                     b.HasIndex("StreetId");
 
+                    b.HasIndex("StructureId");
+
                     b.HasIndex("TypeId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("suggestions");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.SuggestionComments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("SugCommentData")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("SugCommentPhoto")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("SuggestionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SuggestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("suggestionComments");
                 });
 
             modelBuilder.Entity("BCS.Core.Entities.Type", b =>
@@ -250,10 +332,11 @@ namespace BCS.Core.Migrations
                     b.ToTable("type");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -276,7 +359,7 @@ namespace BCS.Core.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,9 +371,8 @@ namespace BCS.Core.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -299,7 +381,7 @@ namespace BCS.Core.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -311,9 +393,8 @@ namespace BCS.Core.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -322,7 +403,7 @@ namespace BCS.Core.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
@@ -335,9 +416,8 @@ namespace BCS.Core.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -346,13 +426,13 @@ namespace BCS.Core.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -361,10 +441,10 @@ namespace BCS.Core.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
@@ -402,6 +482,12 @@ namespace BCS.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BCS.Core.Entities.Structure", "Structure")
+                        .WithMany("Complaints")
+                        .HasForeignKey("StructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BCS.Core.Entities.Type", "Type")
                         .WithMany("Complaints")
                         .HasForeignKey("TypeId")
@@ -410,7 +496,9 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("Complaints")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -418,7 +506,28 @@ namespace BCS.Core.Migrations
 
                     b.Navigation("Street");
 
+                    b.Navigation("Structure");
+
                     b.Navigation("Type");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.ComplaintComments", b =>
+                {
+                    b.HasOne("BCS.Core.Entities.Complaint", "Complaint")
+                        .WithMany("ComplaintCommentses")
+                        .HasForeignKey("ComplaintId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BCS.Core.Entities.AppUser", "User")
+                        .WithMany("ComplaintCommentses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Complaint");
 
                     b.Navigation("User");
                 });
@@ -443,6 +552,12 @@ namespace BCS.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BCS.Core.Entities.Structure", "Structure")
+                        .WithMany("Suggestions")
+                        .HasForeignKey("StructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BCS.Core.Entities.Type", "Type")
                         .WithMany("Suggestions")
                         .HasForeignKey("TypeId")
@@ -451,7 +566,9 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("Suggestions")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -459,21 +576,42 @@ namespace BCS.Core.Migrations
 
                     b.Navigation("Street");
 
+                    b.Navigation("Structure");
+
                     b.Navigation("Type");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("BCS.Core.Entities.SuggestionComments", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("BCS.Core.Entities.Suggestion", "Suggestion")
+                        .WithMany("SuggestionCommentses")
+                        .HasForeignKey("SuggestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BCS.Core.Entities.AppUser", "User")
+                        .WithMany("SuggestionCommentses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Suggestion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("BCS.Core.Entities.AppUser", null)
                         .WithMany()
@@ -482,7 +620,7 @@ namespace BCS.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("BCS.Core.Entities.AppUser", null)
                         .WithMany()
@@ -491,9 +629,9 @@ namespace BCS.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -506,7 +644,7 @@ namespace BCS.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("BCS.Core.Entities.AppUser", null)
                         .WithMany()
@@ -517,7 +655,11 @@ namespace BCS.Core.Migrations
 
             modelBuilder.Entity("BCS.Core.Entities.AppUser", b =>
                 {
+                    b.Navigation("ComplaintCommentses");
+
                     b.Navigation("Complaints");
+
+                    b.Navigation("SuggestionCommentses");
 
                     b.Navigation("Suggestions");
                 });
@@ -527,6 +669,11 @@ namespace BCS.Core.Migrations
                     b.Navigation("Complaints");
 
                     b.Navigation("Suggestions");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.Complaint", b =>
+                {
+                    b.Navigation("ComplaintCommentses");
                 });
 
             modelBuilder.Entity("BCS.Core.Entities.Status", b =>
@@ -541,6 +688,18 @@ namespace BCS.Core.Migrations
                     b.Navigation("Complaints");
 
                     b.Navigation("Suggestions");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.Structure", b =>
+                {
+                    b.Navigation("Complaints");
+
+                    b.Navigation("Suggestions");
+                });
+
+            modelBuilder.Entity("BCS.Core.Entities.Suggestion", b =>
+                {
+                    b.Navigation("SuggestionCommentses");
                 });
 
             modelBuilder.Entity("BCS.Core.Entities.Type", b =>

@@ -19,8 +19,7 @@ namespace BCS.Core.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -38,8 +37,7 @@ namespace BCS.Core.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -112,6 +110,20 @@ namespace BCS.Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "structure",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_structure", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "type",
                 columns: table => new
                 {
@@ -131,8 +143,7 @@ namespace BCS.Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true)
@@ -156,8 +167,7 @@ namespace BCS.Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true)
@@ -185,8 +195,7 @@ namespace BCS.Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -204,10 +213,8 @@ namespace BCS.Core.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RoleId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    RoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -231,8 +238,7 @@ namespace BCS.Core.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     LoginProvider = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
@@ -258,8 +264,6 @@ namespace BCS.Core.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId1 = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TypeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Text = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -267,6 +271,7 @@ namespace BCS.Core.Migrations
                     StatusId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     StreetId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    StructureId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Number = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Photo = table.Column<string>(type: "longtext", nullable: true)
@@ -276,10 +281,11 @@ namespace BCS.Core.Migrations
                 {
                     table.PrimaryKey("PK_complaints", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_complaints_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_complaints_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_complaints_city_CityId",
                         column: x => x.CityId,
@@ -299,6 +305,12 @@ namespace BCS.Core.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_complaints_structure_StructureId",
+                        column: x => x.StructureId,
+                        principalTable: "structure",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_complaints_type_TypeId",
                         column: x => x.TypeId,
                         principalTable: "type",
@@ -313,8 +325,6 @@ namespace BCS.Core.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId1 = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TypeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Text = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -322,6 +332,7 @@ namespace BCS.Core.Migrations
                     StatusId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     StreetId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    StructureId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Number = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Photo = table.Column<string>(type: "longtext", nullable: true)
@@ -331,10 +342,11 @@ namespace BCS.Core.Migrations
                 {
                     table.PrimaryKey("PK_suggestions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_suggestions_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_suggestions_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_suggestions_city_CityId",
                         column: x => x.CityId,
@@ -354,9 +366,77 @@ namespace BCS.Core.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_suggestions_structure_StructureId",
+                        column: x => x.StructureId,
+                        principalTable: "structure",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_suggestions_type_TypeId",
                         column: x => x.TypeId,
                         principalTable: "type",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "complaintComments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ComplaintId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ComCommentData = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Text = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ComCommentPhoto = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_complaintComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_complaintComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_complaintComments_complaints_ComplaintId",
+                        column: x => x.ComplaintId,
+                        principalTable: "complaints",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "suggestionComments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SuggestionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SugCommentData = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Text = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SugCommentPhoto = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_suggestionComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_suggestionComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_suggestionComments_suggestions_SuggestionId",
+                        column: x => x.SuggestionId,
+                        principalTable: "suggestions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -400,6 +480,16 @@ namespace BCS.Core.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_complaintComments_ComplaintId",
+                table: "complaintComments",
+                column: "ComplaintId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_complaintComments_UserId",
+                table: "complaintComments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_complaints_CityId",
                 table: "complaints",
                 column: "CityId");
@@ -415,14 +505,29 @@ namespace BCS.Core.Migrations
                 column: "StreetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_complaints_StructureId",
+                table: "complaints",
+                column: "StructureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_complaints_TypeId",
                 table: "complaints",
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_complaints_UserId1",
+                name: "IX_complaints_UserId",
                 table: "complaints",
-                column: "UserId1");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_suggestionComments_SuggestionId",
+                table: "suggestionComments",
+                column: "SuggestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_suggestionComments_UserId",
+                table: "suggestionComments",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_suggestions_CityId",
@@ -440,14 +545,19 @@ namespace BCS.Core.Migrations
                 column: "StreetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_suggestions_StructureId",
+                table: "suggestions",
+                column: "StructureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_suggestions_TypeId",
                 table: "suggestions",
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_suggestions_UserId1",
+                name: "IX_suggestions_UserId",
                 table: "suggestions",
-                column: "UserId1");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -469,13 +579,19 @@ namespace BCS.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "complaintComments");
+
+            migrationBuilder.DropTable(
+                name: "suggestionComments");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "complaints");
 
             migrationBuilder.DropTable(
                 name: "suggestions");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -488,6 +604,9 @@ namespace BCS.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "street");
+
+            migrationBuilder.DropTable(
+                name: "structure");
 
             migrationBuilder.DropTable(
                 name: "type");

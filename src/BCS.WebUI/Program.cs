@@ -16,6 +16,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRepositories();
 
+builder.Services.AddSession();
+
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
@@ -36,6 +38,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Пропозиції";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
 <div class="container">
@@ -20,6 +22,7 @@
                                 <tr>
                                     <th scope="col" style="width: 10%;">Користувач</th>
                                     <th scope="col" style="width: 10%;">Тип</th>
+                                    <th scope="col" style="width: 10%;">Структура</th>
                                     <th scope="col" style="width: 20%;">Опис</th>
                                     <th scope="col" style="width: 10%;">Дата та час</th>
                                     <th scope="col" style="width: 10%;">Статус</th>
@@ -36,6 +39,7 @@
                                     <tr>
                                         <td>@suggestion.User.UserName</td>
                                         <td>@suggestion.Type.Title</td>
+                                        <td>@suggestion.Structure.Title</td>
                                         <td>@suggestion.Text</td>
                                         <td>@suggestion.Sdatetime</td>
                                         <td>@suggestion.Status.Title</td>
@@ -49,8 +53,12 @@
                                             }
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
-                                            <a href="/complaint/delete/@suggestion.Id" class="btn btn-outline-danger" style="font-size: 16px;">Видалити</a>
+                                            @if (suggestion.Status.Title != "Скасовано")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
+                                                <a href="/suggestion/delete/@suggestion.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                            }
+                                            <a href="/suggestionComments/index/@suggestion.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
                                         </td>
                                     </tr>
                                 }

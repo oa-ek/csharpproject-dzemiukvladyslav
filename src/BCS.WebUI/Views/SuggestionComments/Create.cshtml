@@ -1,0 +1,37 @@
+﻿@model BCS.WebUI.Dtos.SuggestionCommentsCreateDto
+
+@{
+    ViewData["Title"] = "Додати новий коментар";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1>@ViewData["Title"]</h1>
+
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Text">Текст коментаря</label>
+                            <textarea asp-for="Text" class="form-control"></textarea>
+                            <span asp-validation-for="Text" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="SugCommentPhoto">Фото</label>
+                            <input asp-for="SugCommentPhoto" type="file" class="form-control" />
+                            <span asp-validation-for="SugCommentPhoto" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Створити</button>
+                        <a asp-action="Index" asp-controller="Suggestion" class="btn btn-secondary">Скасувати</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

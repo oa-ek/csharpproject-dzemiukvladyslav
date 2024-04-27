@@ -7,6 +7,7 @@
     var cities = ViewBag.Cities as List<BCS.Core.Entities.City>;
     var streets = ViewBag.Streets as List<BCS.Core.Entities.Street>;
     var statuses = ViewBag.Statuses as List<BCS.Core.Entities.Status>;
+    var structures = ViewBag.Structures as List<BCS.Core.Entities.Structure>;
 }
 
 
@@ -17,7 +18,8 @@
                 <div class="card-body">
                     <form asp-action="Edit" asp-controller="Complaint" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                        <input type="hidden" asp-for="UserId" />
+                        <input type="hidden" asp-for="Photo" />
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" asp-for="Sdatetime" value="@Model.Sdatetime.ToUniversalTime()" />
 
@@ -28,11 +30,37 @@
                             <select asp-for="TypeId" class="form-control">
                                 @foreach (var type in types)
                                 {
-                                    var isSelected = Model.TypeId == type.Id ? "selected" : "";
-                                    <option value="@type.Id" selected="@isSelected">@type.Title</option>
+                                    var isSelected = Model.Type.Id == type.Id;
+                                    if (isSelected)
+                                    {
+                                        <option value="@type.Id" selected>@type.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@type.Id">@type.Title</option>
+                                    }
                                 }
                             </select>
                             <span asp-validation-for="TypeId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="StructureId" class="control-label">Міська структура</label>
+                            <select asp-for="StructureId" class="form-control">
+                                @foreach (var structure in structures)
+                                {
+                                    var isSelected = Model.Structure.Id == structure.Id;
+                                    if (isSelected)
+                                    {
+                                        <option value="@structure.Id" selected>@structure.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@structure.Id">@structure.Title</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="StructureId" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
@@ -46,8 +74,15 @@
                             <select asp-for="StatusId" class="form-control">
                                 @foreach (var status in statuses)
                                 {
-                                    var isSelected = Model.StatusId == status.Id ? "selected" : "";
-                                    <option value="@status.Id" selected="@isSelected">@status.Title</option>
+                                    var isSelected = Model.Status.Id == status.Id;
+                                    if (isSelected)
+                                    {
+                                        <option value="@status.Id" selected>@status.Title</option>
+                                    }
+                                    else
+                                    {
+                                       <option value="@status.Id">@status.Title</option>
+                                    }
                                 }
                             </select>
                             <span asp-validation-for="StatusId" class="text-danger"></span>
@@ -58,8 +93,15 @@
                             <select asp-for="CityId" class="form-control">
                                 @foreach (var city in cities)
                                 {
-                                    var isSelected = Model.CityId == city.Id ? "selected" : "";
-                                    <option value="@city.Id" selected="@isSelected">@city.Title</option>
+                                    var isSelected = Model.City.Id == city.Id;
+                                    if (isSelected)
+                                    {
+                                        <option value="@city.Id" selected>@city.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@city.Id">@city.Title</option>
+                                    }
                                 }
                             </select>
                             <span asp-validation-for="CityId" class="text-danger"></span>
@@ -70,8 +112,15 @@
                             <select asp-for="StreetId" class="form-control">
                                 @foreach (var street in streets)
                                 {
-                                    var isSelected = Model.StreetId == street.Id ? "selected" : "";
-                                    <option value="@street.Id" selected="@isSelected">@street.Title</option>
+                                    var isSelected = Model.Street.Id == street.Id;
+                                    if (isSelected)
+                                    {
+                                        <option value="@street.Id" selected>@street.Title</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@street.Id">@street.Title</option>
+                                    }
                                 }
                             </select>
                             <span asp-validation-for="StreetId" class="text-danger"></span>
@@ -79,14 +128,17 @@
 
                         <div class="form-group">
                             <label asp-for="Number" class="control-label">Номер будинку</label>
-                            <input asp-for="Number" class="form-control">@Model.Number</input>
+                            <input asp-for="Number" class="form-control"/>
                             <span asp-validation-for="Number" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Photo" class="control-label">Фото</label>
-                            <input asp-for="Photo" type="file" class="form-control" />
-                            <span asp-validation-for="Photo" class="text-danger"></span>
+                            <label for="PhotoIMG" class="control-label">Фото</label>
+                            <input id="PhotoIMG" name="PhotoIMG" type="file" class="form-control" />
+                            @if (!string.IsNullOrEmpty(Model.Photo))
+                            {
+                                <img src="@Model.Photo" alt="Photo" style="max-width: 150px; max-height: 150px;" />
+                            }
                         </div>
 
                         <div class="form-group">

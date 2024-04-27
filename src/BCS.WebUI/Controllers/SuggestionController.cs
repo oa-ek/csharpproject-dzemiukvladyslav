@@ -3,6 +3,7 @@ using BCS.Core.Entities;
 using BCS.Repositories.Cityes;
 using BCS.Repositories.Statuses;
 using BCS.Repositories.Streets;
+using BCS.Repositories.Structures;
 using BCS.Repositories.Suggestions;
 using BCS.Repositories.Types;
 using BCS.WebUI.Dtos;
@@ -18,6 +19,7 @@ namespace BCS.WebUI.Controllers
             IStatusRepository statusRepository,
             ICityRepository cityRepository,
             IStreetRepository streetRepository,
+            IStructureRepository structureRepository,
             IWebHostEnvironment webHostEnvironment,
             UserManager<AppUser> userManager,
             IMapper mapper) : Controller
@@ -39,6 +41,9 @@ namespace BCS.WebUI.Controllers
                 .Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }).ToList();
 
             ViewBag.Streets = (await streetRepository.GetAllAsync())
+                .Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }).ToList();
+
+            ViewBag.Structures = (await structureRepository.GetAllAsync())
                 .Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }).ToList();
 
             ViewBag.Statuses = (await statusRepository.GetAllAsync())
@@ -104,6 +109,9 @@ namespace BCS.WebUI.Controllers
             ViewBag.Streets = (await streetRepository.GetAllAsync())
                 .ToList();
 
+            ViewBag.Structures = (await structureRepository.GetAllAsync())
+                .ToList();
+
             ViewBag.Statuses = (await statusRepository.GetAllAsync())
                 .ToList();
 
@@ -118,18 +126,17 @@ namespace BCS.WebUI.Controllers
             if (model.Sdatetime != null)
                 entity.Sdatetime = DateTime.ParseExact(model.Sdatetime, @"dd.MM.yyyy HH:mm:ss", null).ToLocalTime();
 
-
-            if (model.Photo is not null)
+            if (model.PhotoIMG is not null)
             {
                 string wwwRootPath = webHostEnvironment.WebRootPath;
 
-                var fileExt = Path.GetExtension(model.Photo.FileName);
+                var fileExt = Path.GetExtension(model.PhotoIMG.FileName);
                 var filePath = Path.Combine("/data/img/", $"{entity.Id}{fileExt}");
                 string path = Path.Combine(wwwRootPath, "data\\img\\", $"{entity.Id}{fileExt}");
 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    model.Photo.CopyTo(fileStream);
+                    model.PhotoIMG.CopyTo(fileStream);
                 }
 
                 entity.Photo = filePath;
@@ -149,7 +156,9 @@ namespace BCS.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, IFormCollection collection)
         {
-            await suggestionRepository.DeleteAsync(id);
+            var suggestion = await suggestionRepository.GetAsync(id);
+            suggestion.Status = (await statusRepository.GetAllAsync()).FirstOrDefault(x => x.Title == "Скасовано");
+            await suggestionRepository.UpdateAsync(suggestion);
 
             return RedirectToAction("Index");
         }

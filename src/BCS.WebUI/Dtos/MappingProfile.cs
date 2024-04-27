@@ -18,11 +18,18 @@ namespace BCS.WebUI.Dtos
             CreateMap<StreetCreateDto, Core.Entities.Street>();
             CreateMap<StreetUpdateDto, Core.Entities.Street>();
 
+            CreateMap<StructureCreateDto, Core.Entities.Structure>();
+            CreateMap<StructureUpdateDto, Core.Entities.Structure>();
+
             CreateMap<ComplaintCreateDto, Core.Entities.Complaint>();
             CreateMap<ComplaintUpdateDto, Core.Entities.Complaint>();
 
             CreateMap<SuggestionCreateDto, Core.Entities.Suggestion>();
             CreateMap<SuggestionUpdateDto, Core.Entities.Suggestion>();
+
+            CreateMap<ComplaintCommentsCreateDto, Core.Entities.ComplaintComments>();
+
+            CreateMap<SuggestionCommentsCreateDto, Core.Entities.SuggestionComments>();
         }
     }
 }
