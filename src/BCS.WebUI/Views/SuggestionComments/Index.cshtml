@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BCS.Core.Entities.SuggestionComments>
+
+@{
+    ViewData["Title"] = "Коментарі";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <a href="/suggestionComments/create" class="btn btn-primary mb-3">Додати новий коментар</a>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-3">@ViewData["Title"]</h1>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 10%;">Користувач</th>
+                                    <th scope="col" style="width: 20%;">Коментар</th>
+                                    <th scope="col" style="width: 10%;">Дата та час</th>
+                                    <th scope="col" style="width: 5%;">Фото</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var suggestionComments in Model)
+                                    {
+                                        <tr>
+                                            <td>@suggestionComments.User.UserName</td>
+                                            <td>@suggestionComments.Text</td>
+                                            <td>@suggestionComments.SugCommentData</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(suggestionComments.SugCommentPhoto))
+                                                {
+                                                    <img src="@suggestionComments.SugCommentPhoto" alt="Suggestion Photo" style="max-width: 150px; max-height: 150px;" />
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

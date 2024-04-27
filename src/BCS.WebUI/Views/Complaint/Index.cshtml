@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BCS.Core.Entities.Complaint>
+
+@{
+    ViewData["Title"] = "Скарги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <a href="/complaint/create" class="btn btn-primary mb-3">Додати нову скаргу</a>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-3">@ViewData["Title"]</h1>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 10%;">Користувач</th>
+                                    <th scope="col" style="width: 10%;">Тип</th>
+                                    <th scope="col" style="width: 10%;">Структура</th>
+                                    <th scope="col" style="width: 20%;">Опис</th>
+                                    <th scope="col" style="width: 10%;">Дата та час</th>
+                                    <th scope="col" style="width: 10%;">Статус</th>
+                                    <th scope="col" style="width: 10%;">Місто</th>
+                                    <th scope="col" style="width: 10%;">Вулиця</th>
+                                    <th scope="col" style="width: 5%;">Номер будинку</th>
+                                    <th scope="col" style="width: 5%;">Фото</th>
+                                    <th scope="col" style="width: 10%;">Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var complaint in Model)
+                                {
+                                    <tr>
+                                        <td>@complaint.User.UserName</td>
+                                        <td>@complaint.Type.Title</td>
+                                        <td>@complaint.Structure.Title</td>
+                                        <td>@complaint.Text</td>
+                                        <td>@complaint.Sdatetime</td>
+                                        <td>@complaint.Status.Title</td>
+                                        <td>@complaint.City.Title</td>
+                                        <td>@complaint.Street.Title</td>
+                                        <td>@complaint.Number</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(complaint.Photo))
+                                            {
+                                                <img src="@complaint.Photo" alt="Complaint Photo" style="max-width: 150px; max-height: 150px;" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (complaint.Status.Title != "Скасовано")
+                                            {
+                                                <a asp-action="Edit" asp-route-id="@complaint.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
+                                                <a href="/complaint/delete/@complaint.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                            }
+                                                <a href="/complaintComments/index/@complaint.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
