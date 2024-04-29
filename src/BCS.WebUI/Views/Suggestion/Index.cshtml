@@ -1,4 +1,12 @@
-﻿@model IEnumerable<BCS.Core.Entities.Suggestion>
+﻿@using BCS.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<BCS.Core.Entities.Suggestion>
+
+@inject UserManager<AppUser> UserManager
+
+@{
+    string currentUserId = UserManager.GetUserId(User);
+}
 
 @{
     ViewData["Title"] = "Пропозиції";
@@ -53,10 +61,13 @@
                                             }
                                         </td>
                                         <td>
-                                            @if (suggestion.Status.Title != "Скасовано")
+                                            @if (suggestion.UserId.ToString() == currentUserId)
                                             {
-                                                <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
-                                                <a href="/suggestion/delete/@suggestion.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                                @if (suggestion.Status.Title != "Скасовано")
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
+                                                    <a href="/suggestion/delete/@suggestion.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                                }
                                             }
                                             <a href="/suggestionComments/index/@suggestion.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
                                         </td>

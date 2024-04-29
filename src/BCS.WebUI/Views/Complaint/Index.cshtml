@@ -1,4 +1,12 @@
-﻿@model IEnumerable<BCS.Core.Entities.Complaint>
+﻿@using BCS.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<BCS.Core.Entities.Complaint>
+
+@inject UserManager<AppUser> UserManager
+
+@{
+    string currentUserId = UserManager.GetUserId(User);
+}
 
 @{
     ViewData["Title"] = "Скарги";
@@ -51,12 +59,15 @@
                                             }
                                         </td>
                                         <td>
-                                            @if (complaint.Status.Title != "Скасовано")
+                                            @if (complaint.UserId.ToString() == currentUserId)
                                             {
-                                                <a asp-action="Edit" asp-route-id="@complaint.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
-                                                <a href="/complaint/delete/@complaint.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                                @if (complaint.Status.Title != "Скасовано")
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@complaint.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
+                                                    <a href="/complaint/delete/@complaint.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                                }
                                             }
-                                                <a href="/complaintComments/index/@complaint.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
+                                            <a href="/complaintComments/index/@complaint.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
                                         </td>
                                     </tr>
                                 }

@@ -16,7 +16,7 @@ namespace BCS.Core.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -41,6 +41,9 @@ namespace BCS.Core.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -85,6 +88,42 @@ namespace BCS.Core.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c1678b67-9251-459e-afc1-aac1282ef664",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Власник сайту",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENJ0BbVC+8oKRGCu9PU3Jv6oFRuXaFrS6wUkbhXJIGD3DipJ3I8UZM7bs4PQMTqFjQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9fc09a94-ff4d-497f-9046-b1ea9d2ee3f1",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("1dc2b12d-e3ae-4c9d-9ace-f71f9d32bec3"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "05f73598-94d6-4b89-be73-7ee167ccfe46",
+                            Email = "vlad.dzemyuk@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Владислав Дзем'юк",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "VLAD.DZEMYUK@GMAIL.COM",
+                            NormalizedUserName = "VLAD.DZEMYUK@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPDhjBOzxL0w3ZgK032NqWFvWOH6CTYLXvmISJwDspkHU+oulD81g6Cx2FXYlKXvmQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "634aeb9f-51d9-4057-8491-0508a7f43b85",
+                            TwoFactorEnabled = false,
+                            UserName = "vlad.dzemyuk@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("BCS.Core.Entities.City", b =>
@@ -357,6 +396,29 @@ namespace BCS.Core.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"),
+                            ConcurrencyStamp = "2c43c23e-24dc-4159-a47c-c9e89730a11f",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"),
+                            ConcurrencyStamp = "762bfa0c-6519-41e0-9ec5-e814a1cd395d",
+                            Name = "Worker",
+                            NormalizedName = "WORKER"
+                        },
+                        new
+                        {
+                            Id = new Guid("e60a5ecb-5dc7-493f-a17b-c87624073ece"),
+                            ConcurrencyStamp = "e60a5ecb-5dc7-493f-a17b-c87624073ece",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -439,6 +501,18 @@ namespace BCS.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
+                            RoleId = new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f")
+                        },
+                        new
+                        {
+                            UserId = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
+                            RoleId = new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

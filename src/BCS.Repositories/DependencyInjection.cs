@@ -1,4 +1,5 @@
-﻿using BCS.Repositories.Cityes;
+﻿using BCS.Core.Entities;
+using BCS.Repositories.Cityes;
 using BCS.Repositories.ComplaintCommentses;
 using BCS.Repositories.Complaints;
 using BCS.Repositories.Statuses;
@@ -7,6 +8,8 @@ using BCS.Repositories.Structures;
 using BCS.Repositories.SuggestionCommentses;
 using BCS.Repositories.Suggestions;
 using BCS.Repositories.Types;
+using BCS.Repositories.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BCS.Repositories
@@ -15,6 +18,9 @@ namespace BCS.Repositories
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<UserManager<AppUser>>();
+            services.AddScoped<RoleManager<IdentityRole<Guid>>>();
             services.AddScoped<ITypeRepository, TypeRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<ICityRepository, CityRepository>();

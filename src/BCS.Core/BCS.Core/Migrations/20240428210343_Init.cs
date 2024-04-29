@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace BCS.Core.Migrations
 {
     /// <inheritdoc />
@@ -38,6 +40,8 @@ namespace BCS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    FullName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -441,6 +445,34 @@ namespace BCS.Core.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"), "2c43c23e-24dc-4159-a47c-c9e89730a11f", "Admin", "ADMIN" },
+                    { new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"), "762bfa0c-6519-41e0-9ec5-e814a1cd395d", "Worker", "WORKER" },
+                    { new Guid("e60a5ecb-5dc7-493f-a17b-c87624073ece"), "e60a5ecb-5dc7-493f-a17b-c87624073ece", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"), 0, "c1678b67-9251-459e-afc1-aac1282ef664", "admin@gmail.com", true, "Власник сайту", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAENJ0BbVC+8oKRGCu9PU3Jv6oFRuXaFrS6wUkbhXJIGD3DipJ3I8UZM7bs4PQMTqFjQ==", null, false, "9fc09a94-ff4d-497f-9046-b1ea9d2ee3f1", false, "admin@gmail.com" },
+                    { new Guid("1dc2b12d-e3ae-4c9d-9ace-f71f9d32bec3"), 0, "05f73598-94d6-4b89-be73-7ee167ccfe46", "vlad.dzemyuk@gmail.com", true, "Владислав Дзем'юк", false, null, "VLAD.DZEMYUK@GMAIL.COM", "VLAD.DZEMYUK@GMAIL.COM", "AQAAAAIAAYagAAAAEPDhjBOzxL0w3ZgK032NqWFvWOH6CTYLXvmISJwDspkHU+oulD81g6Cx2FXYlKXvmQ==", null, false, "634aeb9f-51d9-4057-8491-0508a7f43b85", false, "vlad.dzemyuk@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"), new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e") },
+                    { new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"), new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e") }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

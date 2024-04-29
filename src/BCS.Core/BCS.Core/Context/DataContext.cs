@@ -24,7 +24,6 @@ namespace BCS.Core.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<SuggestionComments>()
               .HasOne(sc => sc.Suggestion)
@@ -37,6 +36,9 @@ namespace BCS.Core.Context
               .WithMany(s => s.ComplaintCommentses)
               .HasForeignKey(sc => sc.ComplaintId)
               .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Seed();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -26,6 +26,11 @@ namespace BCS.WebUI.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            return View(await complaintRepository.GetAllAsync());
+        }
+
+        public async Task<IActionResult> MyIndex()
+        {
             var currentUser = await userManager.GetUserAsync(User);
             return View(await complaintRepository.GetAllByUserAsync(currentUser));
         }
