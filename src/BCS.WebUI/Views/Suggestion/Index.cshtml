@@ -1,0 +1,83 @@
+﻿@using BCS.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<BCS.Core.Entities.Suggestion>
+
+@inject UserManager<AppUser> UserManager
+
+@{
+    string currentUserId = UserManager.GetUserId(User);
+}
+
+@{
+    ViewData["Title"] = "Пропозиції";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <a href="/suggestion/create" class="btn btn-primary mb-3">Додати нову пропозицію</a>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-3">@ViewData["Title"]</h1>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 10%;">Користувач</th>
+                                    <th scope="col" style="width: 10%;">Тип</th>
+                                    <th scope="col" style="width: 10%;">Структура</th>
+                                    <th scope="col" style="width: 20%;">Опис</th>
+                                    <th scope="col" style="width: 10%;">Дата та час</th>
+                                    <th scope="col" style="width: 10%;">Статус</th>
+                                    <th scope="col" style="width: 10%;">Місто</th>
+                                    <th scope="col" style="width: 10%;">Вулиця</th>
+                                    <th scope="col" style="width: 5%;">Номер будинку</th>
+                                    <th scope="col" style="width: 5%;">Фото</th>
+                                    <th scope="col" style="width: 10%;">Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var suggestion in Model)
+                                {
+                                    <tr>
+                                        <td>@suggestion.User.UserName</td>
+                                        <td>@suggestion.Type.Title</td>
+                                        <td>@suggestion.Structure.Title</td>
+                                        <td>@suggestion.Text</td>
+                                        <td>@suggestion.Sdatetime</td>
+                                        <td>@suggestion.Status.Title</td>
+                                        <td>@suggestion.City.Title</td>
+                                        <td>@suggestion.Street.Title</td>
+                                        <td>@suggestion.Number</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(suggestion.Photo))
+                                            {
+                                                <img src="@suggestion.Photo" alt="Suggestion Photo" style="max-width: 150px; max-height: 150px;" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (suggestion.UserId.ToString() == currentUserId)
+                                            {
+                                                @if (suggestion.Status.Title != "Скасовано")
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3" style="font-size: 16px;">Редагувати</a>
+                                                    <a href="/suggestion/delete/@suggestion.Id" class="btn btn-outline-danger" style="font-size: 16px;">Скасувати</a>
+                                                }
+                                            }
+                                            <a href="/suggestionComments/index/@suggestion.Id" class="btn btn-outline-info me-3" style="font-size: 16px;">Коментарі</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model BCS.Core.Entities.Structure
+
+@{
+    ViewData["Title"] = "Редагувати обрану структуру";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+                <form asp-action="Update">
+                    <input type="hidden" value="@Model.Id">
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Назва</label>
+                        <input asp-for="Title" value="@Model.Title" class="form-control" id="title" placeholder="Введіть нову вулицю">
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Редагувати</button>
+                        <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
