@@ -6,52 +6,59 @@
     var roles = ViewBag.Roles as List<IdentityRole<Guid>>;
 }
 
-<div class="float-end">
-    <a href="/user/index" class="btn btn-outline-dark">Повернутися до списку</a>
-</div>
-
-<h1>Редагування</h1>
-<hr />
-
-<div class="row">
-    <form asp-action="Edit" class="col-md-4">
-        @Html.AntiForgeryToken()
-
-        <input asp-for="Id" type="hidden" />
-
-        <div class="mb-3">
-            <label asp-for="FullName" class="form-label">Повне ім'я</label>
-            <input asp-for="FullName" class="form-control" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Roles" class="form-label">Ролі</label>
-            <select class="form-select" size="3" id="roles" name="roles" multiple>
-                @foreach (var r in roles)
-                {
-                    var selected = @Model.Roles.Any(x => x.Name == r.Name) ? true : false;
-                    <!option value="@r.Name" @(selected ? "selected" : "")>@r.Name</!option>
-                }
-            </select>
-        </div>
-        <div class="mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" asp-for="IsEmailConfirmed">
-                <label class="form-check-label" asp-for="IsEmailConfirmed">Електронна пошта підтверджена</label>
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">Новий користувач</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-action="Index" asp-controller="user" class="btn btn-outline-secondary mb-0">Скасувати</a>
+                </div>
             </div>
-        </div>
+            <hr />
 
-        <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Зберегти</button>
+            <form asp-action="Edit">
+                @Html.AntiForgeryToken()
+
+                <input asp-for="Id" type="hidden" />
+
+                <label>Повне ім'я</label>
+                <div class="form-group mb-3">
+                    <input asp-for="FullName" class="form-control" placeholder="Введіть повне ім'я користувача" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <label>Електронна адреса</label>
+                <div class="form-group mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <label>Ролі</label>
+                <div class="form-group mb-3">
+                    <select class="form-select" size="3" id="roles" name="roles" multiple>
+                        @foreach (var r in roles)
+                        {
+                            var selected = @Model.Roles.Any(x => x.Name == r.Name) ? true : false;
+                            <!option value="@r.Name" @(selected ? "selected" : "")>@r.Name</!option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" asp-for="IsEmailConfirmed">
+                        <label class="form-check-label" asp-for="IsEmailConfirmed">Електронна пошта підтверджена</label>
+                    </div>
+                </div>
+
+                <div class="form-group text-center mb-3">
+                    <button class="btn btn-outline-warning createButtons" type="submit">Зберегти</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 

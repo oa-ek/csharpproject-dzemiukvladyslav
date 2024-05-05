@@ -71,7 +71,7 @@ namespace BCS.WebUI.Areas.Identity.Pages.Account
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Змініть свій пароль, <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>клацнувши тут</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

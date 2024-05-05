@@ -9,20 +9,41 @@
     }
 }
 
-<h1>Manage your account</h1>
-
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+<body>
+    <div class="error-pagewrap">
+        <div class="error-page-int">
+            <div class="text-center custom-login">
+                <h3>КЕРУЙТЕ СВОЇМ ОБЛІКОВИМ ЗАПИСОМ</h3>
+                <p>Змініть налаштування облікового запису</p>
+            </div>
+            <div class="content-error">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="row justify-content-center">
+                                <div class="col-md-4 col-12">
+                                    <div class="menu-section">
+                                        <partial name="_ManageNav" />
+                                    </div>
+                                </div>
+                            <div class="col-md-8 col-12">
+                                    <div class="profile-section">
+                                        @RenderBody()
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <!-- jquery -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- main JS -->
+    <script src="js/main.js"></script>
+</body>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

@@ -2,37 +2,57 @@
 
 @model IEnumerable<UserListItemModel>
 
-<a href="/user/create" class="btn btn-primary float-end">Створити</a>
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Користувачі</h1>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="/user/create" class="btn btn-outline-primary mb-0">Додати нового користувача</a>
+                    </div>
+                </div>
+                <hr />
 
-<h1>Користувачі</h1>
+                <div class="row">
+                    <div class="list-group">
+                        <table class="table table-bordered mb-3">
+                            <thead>
+                                <tr>
+                                    <th>Повне ім'я</th>
+                                    <th>Email</th>
+                                    <th>Ролі</th>
+                                    <th>Підтверджено</th>
+                                    <th>Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var u in Model)
+                                {
+                                    <tr>
+                                        <td>@u.FullName</td>
+                                        <td>@u.Email</td>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Повне ім'я</th>
-            <th>Email</th>
-            <th>Ролі</th>
-            <th>Підтверджено</th>
-            <th>Дії</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var u in Model)
-        {
-            <tr>
-                <td>@u.FullName</td>
-                <td>@u.Email</td>
+                                        <td>@string.Join(", ", u.Roles)</td>
+                                        <td><input class="form-check-input" @(u.IsEmailConfirmed ? "checked" : "") type="checkbox" disabled></td>
+                                        <td>
+                                            <a href="/user/edit/@u.Id" class="btn"><i class="bi bi-pencil-square icons_edit"></i></a>
+                                            <a href="#" data-id="@u.Id" data-email="@u.Email" class="btn btn-remove-user"><i class="bi bi-trash3 icons_delete"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <td>@string.Join(", ", u.Roles)</td>
-                <td><input class="form-check-input" @(u.IsEmailConfirmed ? "checked" : "") type="checkbox" disabled></td>
-                <td>
-                    <a href="/user/edit/@u.Id" class="btn btn-warning">Редагувати</a>
-                    <a href="#" data-id="@u.Id" data-email="@u.Email" class="btn btn-danger btn-remove-user">Видалити</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
 
 
 <div class="modal" tabindex="-1" id="modalError">
@@ -52,7 +72,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" id="modalQuestion">
+<div class="modal fade" tabindex="-1" id="modalQuestion" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,11 +80,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Чи справді Ви бажаєте назавжди видалити користувача <strong class="userName">-</strong>?</p>
+                <p>Ви впевнені, що хочете видалити цього користувача? <strong class="userName">-</strong>?</p>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn-primary btn btn-remove-approve">Так! Видаляємо!</a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Скасувати</button>
+                <a href="#" class="btn btn-outline-danger btn-remove-approve">Так! Видалити!</a>
             </div>
         </div>
     </div>

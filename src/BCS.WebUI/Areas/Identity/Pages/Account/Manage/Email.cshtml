@@ -1,43 +1,84 @@
 ﻿@page
 @model EmailModel
 @{
-    ViewData["Title"] = "Manage Email";
+    ViewData["Title"] = "ЗМІНА ЕЛЕКТРОНОЇ ПОШТИ";
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="email-form" method="post">
-            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
-            @if (Model.IsEmailConfirmed)
-            {
-                <div class="form-floating mb-3 input-group">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
-                        <div class="input-group-append">
-                            <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
-                        </div>
-                    <label asp-for="Email" class="form-label"></label>
-                </div>
-            }
-            else
-            {
-                <div class="form-floating mb-3">
-                    <input asp-for="Email" class="form-control" placeholder="Please enter your email." disabled />
-                    <label asp-for="Email" class="form-label"></label>
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                </div>
-            }
-            <div class="form-floating mb-3">
-                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Please enter new email." />
-                <label asp-for="Input.NewEmail" class="form-label"></label>
-                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- modernizr JS -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <div class="error-pagewrap">
+        <div class="error-page-int">
+            <div class="text-center custom-login">
+                <h3>@ViewData["Title"]</h3>
+                <partial name="_StatusMessage" for="StatusMessage" />
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
-        </form>
+            <div class="content-error">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-12">
+                                <form id="email-form" method="post">
+                                    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                                    <div class="form-group">
+                                        @if (Model.IsEmailConfirmed)
+                                        {
+                                            <label>Електронна адреса</label>
+                                            <div class="input-group flex-nowrap mb-3">
+                                                <input asp-for="Email" class="form-control" placeholder="name@example.com" disabled />
+                                                <span class="input-group-text text-success font-weight-bold">✓</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <label>Електронна адреса</label>
+                                            <div class="form-group mb-3">
+                                                <input asp-for="Email" class="form-control" placeholder="name@example.com" disabled />
+                                                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                                            </div>
+                                        }
+
+
+                                        <label>Нова електронна адреса</label>
+                                        <div class="form-group mb-4">
+                                            <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" />
+                                            <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group text-center mb-4">
+                                            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-primary">Змінити електронну адресу</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- jquery -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- main JS -->
+    <script src="js/main.js"></script>
+</body>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

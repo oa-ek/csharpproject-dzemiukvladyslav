@@ -6,45 +6,51 @@
 }
 
 <div class="container">
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-3">
         <div class="col-md-10">
-            <a href="/suggestionComments/create" class="btn btn-primary mb-3">Додати новий коментар</a>
-
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h1 class="text-center mb-3">@ViewData["Title"]</h1>
-
-                    <div class="table-responsive">
-                        <table class="table table-striped" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="width: 10%;">Користувач</th>
-                                    <th scope="col" style="width: 20%;">Коментар</th>
-                                    <th scope="col" style="width: 10%;">Дата та час</th>
-                                    <th scope="col" style="width: 5%;">Фото</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                    @foreach (var suggestionComments in Model)
-                                    {
-                                        <tr>
-                                            <td>@suggestionComments.User.UserName</td>
-                                            <td>@suggestionComments.Text</td>
-                                            <td>@suggestionComments.SugCommentData</td>
-                                            <td>
-                                                @if (!string.IsNullOrEmpty(suggestionComments.SugCommentPhoto))
-                                                {
-                                                    <img src="@suggestionComments.SugCommentPhoto" alt="Suggestion Photo" style="max-width: 150px; max-height: 150px;" />
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">@ViewData["Title"]</h1>
                     </div>
+                    <div class="col-md-6 text-end">
+                        <a href="/suggestionComments/create" class="btn btn-outline-primary mb-0">Додати новий коментар</a>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row">
+                    @if (Model != null)
+                    {
+                        @foreach (var suggestionComments in Model)
+                        {
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-header bg- ComColorHead">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>@suggestionComments.User.FullName</strong></p>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <small>@suggestionComments.SugCommentData</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>@suggestionComments.Text</p>
+
+                                        @if (!string.IsNullOrEmpty(suggestionComments.SugCommentPhoto))
+                                        {
+                                            <div class="mt-3">
+                                                <h6 class="mb-2 text-center">Фото</h6>
+                                                <img src="@suggestionComments.SugCommentPhoto" alt="Suggestion Photo" class="img-thumbnail" />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
