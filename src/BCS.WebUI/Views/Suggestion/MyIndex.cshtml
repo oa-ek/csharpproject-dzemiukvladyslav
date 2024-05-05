@@ -1,0 +1,137 @@
+﻿@using BCS.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<BCS.Core.Entities.Suggestion>
+
+@{
+    ViewData["Title"] = "Мої пропозиції";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">@ViewData["Title"]</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="/suggestion/create" class="btn btn-outline-primary mb-0">Додати нову пропозицію</a>
+                </div>
+            </div>
+            <hr />
+
+            <div class="row">
+                @foreach (var suggestion in Model)
+                {
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header ComColorHead">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>@suggestion.User.UserName</div>
+                                    <div>@suggestion.Sdatetime</div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-1 pb-1">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <strong>Структура:</strong> @suggestion.Structure.Title
+                                    <strong>Тип:</strong> @suggestion.Type.Title
+                                    <strong>Статус:</strong> @suggestion.Status.Title
+                                </div>
+                                <div class="mb-1">
+                                    <strong>Адреса:</strong>
+                                    <span>@suggestion.City.Title</span>,
+                                    <span>@suggestion.Street.Title</span>,
+                                    <span>@suggestion.Number</span>
+                                </div>
+
+                                <div class="mb-1 text-center">
+                                    <strong>Опис:</strong>
+                                </div>
+                                <div class="mb-1">
+                                    <span>@suggestion.Text</span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(suggestion.Photo))
+                                {
+                                    <div class="mb-1 text-center">
+                                        <strong>Фото:</strong>
+                                    </div>
+                                    <div class="mb-1 text-center">
+                                        <img src="@suggestion.Photo" class="card-img-bottom rounded sizeMedia" alt="Suggestion Photo" onclick="openModal('viewImageModal-@suggestion.Id')">
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <a href="/suggestionComments/index/@suggestion.Id" class="btn btn-outline-info">Коментарі</a>
+                                    @if (suggestion.Status.Title != "Скасовано")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@suggestion.Id" class="btn btn-outline-warning me-3">Редагувати</a>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@suggestion.Id">Скасувати</button>
+                                    }
+                                    <form method="post" action="/suggestion/generatewordreport/@suggestion.Id">
+                                        <button type="submit" class="btn btn-outline-success">Звіт Word</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var suggestion in Model)
+{
+    <div class="modal fade" id="deleteModal-@suggestion.Id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Скасування пропозиції</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Ви впевнені, що хочете скасувати цю пропозицію?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Не скасовувати</button>
+                    <form asp-action="Delete" asp-route-id="@suggestion.Id" method="post">
+                        <button type="submit" class="btn btn-outline-danger">Так, скасувати!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var suggestion in Model)
+{
+    <div class="modal fade" id="viewImageModal-@suggestion.Id" tabindex="-1" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewImageModalLabel">Перегляд зображення</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="@suggestion.Photo" class="img-fluid" alt="Suggestion Photo">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('viewImageModal'));
+    });
+
+    function openModal(modalId) {
+        var modal = new bootstrap.Modal(document.getElementById(modalId));
+        modal.show();
+    }
+</script>
