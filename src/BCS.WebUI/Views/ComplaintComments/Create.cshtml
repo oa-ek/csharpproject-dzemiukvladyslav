@@ -1,0 +1,44 @@
+﻿@model BCS.WebUI.Dtos.ComplaintCommentsCreateDto
+
+@{
+    ViewData["Title"] = "Додати коментар";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">@ViewData["Title"]</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-action="Index" asp-controller="Complaint" class="btn btn-outline-secondary mb-0">Скасувати</a>
+                </div>
+            </div>
+            <hr />
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label>Текст коментаря</label>
+                    <div>
+                        <textarea asp-for="Text" class="form-control" rows="7" placeholder="Почніть вводити текст коментаря"></textarea>
+                        <span asp-validation-for="Text" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Фото</label>
+                    <div>
+                        <input asp-for="ComCommentPhoto" type="file" class="form-control" />
+                        <span asp-validation-for="ComCommentPhoto" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-primary createButtons">Створити</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

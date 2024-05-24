@@ -1,0 +1,85 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "РЕЄСТРАЦІЯ";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- modernizr JS -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <div class="error-pagewrap">
+        <div class="error-page-int">
+            <div class="text-center custom-login">
+                <h3>@ViewData["Title"]</h3>
+                <p>Створити новий обліковий запис.</p>
+            </div>
+            <div class="content-error">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 col-12">
+                                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Повне ім'я</label>
+                                            <div>
+                                                <input asp-for="Input.FullName" class="form-control" autocomplete="name" aria-required="true" placeholder="Повне ім'я" style="margin-bottom: 10px;" />
+                                                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Електронна адреса</label>
+                                            <div>
+                                                <input asp-for="Input.Email" class="form-control " autocomplete="username" aria-required="true" placeholder="name@example.com" style="margin-bottom: 10px;" />
+                                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Пароль</label>
+                                            <div>
+                                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Пароль" style="margin-bottom: 10px;" />
+                                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Підтвердити пароль</label>
+                                            <div>
+                                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Підтвердити пароль" style="margin-bottom: 10px;" />
+                                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button id="registerSubmit" type="submit" class="btn btn-primary">Зареєструватися</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- main JS -->
+    <script src="js/main.js"></script>
+</body>
