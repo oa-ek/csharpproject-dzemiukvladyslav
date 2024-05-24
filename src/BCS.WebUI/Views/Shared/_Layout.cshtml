@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] BCS</title>
+    <title>@ViewData["Title"]-BCS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BCS.WebUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body class="d-flex flex-column">
     <div class="wrapper h-vh-100">
@@ -20,7 +21,7 @@
                     </button>
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <span class="fs-4"><i class="bi bi-book-half"></i> BCS</span>
-                    </a>
+                    </a
                     <div class="ms-auto">
                         <partial name="_LoginPartial" />
                     </div>
@@ -48,10 +49,10 @@
                                 @if (User.IsInRole("Admin") || User.IsInRole("Worker") || User.IsInRole("User"))
                                 {
                                     <li class="nav-item">
-                                        <button class="nav-link text-dark accordion-button pad_acord" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <button class="nav-link text-dark accordion-button pad_acord" data-bs-toggle="collapse" data-bs-target="#collapseOne" data-bs-parent="#accordion">
                                             Мої звернення
                                         </button>
-                                        <div id="collapseOne" class="collapse">
+                                        <div id="collapseOne" class="collapse show">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
                                                     <a class="nav-link text-black" asp-area="" asp-controller="Complaint" asp-action="MyIndex">Мої скарги</a>
@@ -73,7 +74,7 @@
                                         <button class="nav-link text-dark accordion-button pad_acord" data-bs-toggle="collapse" data-bs-target="#collapseTwo" data-bs-parent="#accordion">
                                             Додатково
                                         </button>
-                                        <div id="collapseTwo" class="collapse">
+                                        <div id="collapseTwo" class="collapse show">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item">
                                                     <a class="nav-link text-black" asp-area="" asp-controller="Type" asp-action="Index">Типи</a>
@@ -116,6 +117,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

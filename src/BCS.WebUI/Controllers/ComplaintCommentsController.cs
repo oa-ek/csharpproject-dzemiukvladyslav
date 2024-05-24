@@ -80,5 +80,13 @@ namespace BCS.WebUI.Controllers
             await _complaintCommentsRepository.CreateAsync(entity);
             return RedirectToAction("Index", "Complaint");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _complaintCommentsRepository.DeleteAsync(id);
+            return RedirectToAction("Index", "Complaint");
+        }
     }
 }

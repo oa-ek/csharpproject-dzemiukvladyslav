@@ -34,7 +34,7 @@
                         <div class="card">
                             <div class="card-header ComColorHead">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>@complaint.User.UserName</div>
+                                    <div><strong>@complaint.User.FullName</strong></div>
                                     <div>@complaint.Sdatetime</div>
                                 </div>
                             </div>
@@ -63,9 +63,8 @@
                                         <strong>Фото:</strong>
                                     </div>
                                     <div class="mb-1 text-center">
-                                        <img src="@complaint.Photo" class="card-img-bottom rounded sizeMedia" alt="Сomplaint Photo" onclick="openModal('viewImageModal-@complaint.Id')">
+                                        <img src="@complaint.Photo" class="card-img-bottom rounded sizeMedia" alt="Complaint Photo" onclick="openModal('viewImageModal-@complaint.Id')">
                                     </div>
-
                                 }
                             </div>
                             <div class="card-footer">
