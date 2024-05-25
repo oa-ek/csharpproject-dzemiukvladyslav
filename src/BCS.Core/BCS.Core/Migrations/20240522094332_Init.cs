@@ -451,9 +451,9 @@ namespace BCS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"), "2c43c23e-24dc-4159-a47c-c9e89730a11f", "Admin", "ADMIN" },
-                    { new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"), "762bfa0c-6519-41e0-9ec5-e814a1cd395d", "Worker", "WORKER" },
-                    { new Guid("e60a5ecb-5dc7-493f-a17b-c87624073ece"), "e60a5ecb-5dc7-493f-a17b-c87624073ece", "User", "USER" }
+                    { new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"), "18990c3c-a576-4dcb-bd16-f4d1a5e41861", "Admin", "ADMIN" },
+                    { new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"), "22c5e8c9-745c-45f1-b6a4-9df6ce41c40d", "Worker", "WORKER" },
+                    { new Guid("6cc3b719-aa10-49a0-8746-ace9486a0c3c"), "6cc3b719-aa10-49a0-8746-ace9486a0c3c", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -461,8 +461,8 @@ namespace BCS.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"), 0, "c1678b67-9251-459e-afc1-aac1282ef664", "admin@gmail.com", true, "Власник сайту", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAENJ0BbVC+8oKRGCu9PU3Jv6oFRuXaFrS6wUkbhXJIGD3DipJ3I8UZM7bs4PQMTqFjQ==", null, false, "9fc09a94-ff4d-497f-9046-b1ea9d2ee3f1", false, "admin@gmail.com" },
-                    { new Guid("1dc2b12d-e3ae-4c9d-9ace-f71f9d32bec3"), 0, "05f73598-94d6-4b89-be73-7ee167ccfe46", "vlad.dzemyuk@gmail.com", true, "Владислав Дзем'юк", false, null, "VLAD.DZEMYUK@GMAIL.COM", "VLAD.DZEMYUK@GMAIL.COM", "AQAAAAIAAYagAAAAEPDhjBOzxL0w3ZgK032NqWFvWOH6CTYLXvmISJwDspkHU+oulD81g6Cx2FXYlKXvmQ==", null, false, "634aeb9f-51d9-4057-8491-0508a7f43b85", false, "vlad.dzemyuk@gmail.com" }
+                    { new Guid("82a5197e-c9d5-4458-9f18-07e3c0c53a81"), 0, "bcbb091d-3274-4420-a7e0-c716fe8a443b", "vlad.dzemyuk@gmail.com", true, "Владислав Дзем'юк", false, null, "VLAD.DZEMYUK@GMAIL.COM", "VLAD.DZEMYUK@GMAIL.COM", "AQAAAAIAAYagAAAAEGK67XF1uTUSiiOnAse18HIkPckmt3JMZi3kLqP+Ccxu6CrhF4sFB+LludIiAF8elw==", null, false, "11d67fc4-ed05-4cbf-b682-8869ae647aea", false, "vlad.dzemyuk@gmail.com" },
+                    { new Guid("96c38101-a1b4-4360-8544-b40122769292"), 0, "73c60151-6779-48b1-a56c-4111f43a99da", "admin@gmail.com", true, "Власник сайту", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEvXGqJebHOhjHkMVMmM1ZWcAY02ktIc/jCMOL/DIjOd6nUoMb8whvDfU0qfTCKUZQ==", null, false, "ed8963f7-a5ac-4c0e-b111-177f4adc645f", false, "admin@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -470,8 +470,8 @@ namespace BCS.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"), new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e") },
-                    { new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"), new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e") }
+                    { new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"), new Guid("96c38101-a1b4-4360-8544-b40122769292") },
+                    { new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"), new Guid("96c38101-a1b4-4360-8544-b40122769292") }
                 });
 
             migrationBuilder.CreateIndex(

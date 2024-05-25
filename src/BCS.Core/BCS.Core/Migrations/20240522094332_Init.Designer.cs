@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BCS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240428210343_Init")]
+    [Migration("20240522094332_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -95,35 +95,35 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
+                            Id = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1678b67-9251-459e-afc1-aac1282ef664",
+                            ConcurrencyStamp = "73c60151-6779-48b1-a56c-4111f43a99da",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Власник сайту",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENJ0BbVC+8oKRGCu9PU3Jv6oFRuXaFrS6wUkbhXJIGD3DipJ3I8UZM7bs4PQMTqFjQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEvXGqJebHOhjHkMVMmM1ZWcAY02ktIc/jCMOL/DIjOd6nUoMb8whvDfU0qfTCKUZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9fc09a94-ff4d-497f-9046-b1ea9d2ee3f1",
+                            SecurityStamp = "ed8963f7-a5ac-4c0e-b111-177f4adc645f",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = new Guid("1dc2b12d-e3ae-4c9d-9ace-f71f9d32bec3"),
+                            Id = new Guid("82a5197e-c9d5-4458-9f18-07e3c0c53a81"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05f73598-94d6-4b89-be73-7ee167ccfe46",
+                            ConcurrencyStamp = "bcbb091d-3274-4420-a7e0-c716fe8a443b",
                             Email = "vlad.dzemyuk@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Владислав Дзем'юк",
                             LockoutEnabled = false,
                             NormalizedEmail = "VLAD.DZEMYUK@GMAIL.COM",
                             NormalizedUserName = "VLAD.DZEMYUK@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPDhjBOzxL0w3ZgK032NqWFvWOH6CTYLXvmISJwDspkHU+oulD81g6Cx2FXYlKXvmQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGK67XF1uTUSiiOnAse18HIkPckmt3JMZi3kLqP+Ccxu6CrhF4sFB+LludIiAF8elw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "634aeb9f-51d9-4057-8491-0508a7f43b85",
+                            SecurityStamp = "11d67fc4-ed05-4cbf-b682-8869ae647aea",
                             TwoFactorEnabled = false,
                             UserName = "vlad.dzemyuk@gmail.com"
                         });
@@ -403,22 +403,22 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f"),
-                            ConcurrencyStamp = "2c43c23e-24dc-4159-a47c-c9e89730a11f",
+                            Id = new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"),
+                            ConcurrencyStamp = "18990c3c-a576-4dcb-bd16-f4d1a5e41861",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d"),
-                            ConcurrencyStamp = "762bfa0c-6519-41e0-9ec5-e814a1cd395d",
+                            Id = new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"),
+                            ConcurrencyStamp = "22c5e8c9-745c-45f1-b6a4-9df6ce41c40d",
                             Name = "Worker",
                             NormalizedName = "WORKER"
                         },
                         new
                         {
-                            Id = new Guid("e60a5ecb-5dc7-493f-a17b-c87624073ece"),
-                            ConcurrencyStamp = "e60a5ecb-5dc7-493f-a17b-c87624073ece",
+                            Id = new Guid("6cc3b719-aa10-49a0-8746-ace9486a0c3c"),
+                            ConcurrencyStamp = "6cc3b719-aa10-49a0-8746-ace9486a0c3c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -508,13 +508,13 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
-                            RoleId = new Guid("2c43c23e-24dc-4159-a47c-c9e89730a11f")
+                            UserId = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
+                            RoleId = new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861")
                         },
                         new
                         {
-                            UserId = new Guid("090f1c19-de94-40ee-b595-83b6ab13ca0e"),
-                            RoleId = new Guid("762bfa0c-6519-41e0-9ec5-e814a1cd395d")
+                            UserId = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
+                            RoleId = new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d")
                         });
                 });
 
