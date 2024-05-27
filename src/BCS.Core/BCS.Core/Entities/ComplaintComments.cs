@@ -7,10 +7,12 @@ namespace BCS.Core.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [ForeignKey("User")]
-        public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }
+        ////////
+        public string UserName { get; set; }
 
+        [ForeignKey("User")]
+        public Guid? UserId { get; set; }
+        public virtual AppUser? User { get; set; }
 
         [ForeignKey("Complaint")]
         public Guid ComplaintId { get; set; }

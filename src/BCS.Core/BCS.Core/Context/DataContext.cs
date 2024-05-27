@@ -11,6 +11,7 @@ namespace BCS.Core.Context
           : base(options)
         {
         }
+
         public DbSet<City> Cityes { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Status> Statuses { get; set; }

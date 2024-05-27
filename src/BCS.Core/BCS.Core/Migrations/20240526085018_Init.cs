@@ -267,7 +267,9 @@ namespace BCS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     TypeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Text = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -288,8 +290,7 @@ namespace BCS.Core.Migrations
                         name: "FK_complaints_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_complaints_city_CityId",
                         column: x => x.CityId,
@@ -328,7 +329,9 @@ namespace BCS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     TypeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Text = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -349,8 +352,7 @@ namespace BCS.Core.Migrations
                         name: "FK_suggestions_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_suggestions_city_CityId",
                         column: x => x.CityId,
@@ -389,7 +391,9 @@ namespace BCS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     ComplaintId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ComCommentData = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Text = table.Column<string>(type: "longtext", nullable: false)
@@ -404,8 +408,7 @@ namespace BCS.Core.Migrations
                         name: "FK_complaintComments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_complaintComments_complaints_ComplaintId",
                         column: x => x.ComplaintId,
@@ -420,7 +423,9 @@ namespace BCS.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     SuggestionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     SugCommentData = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Text = table.Column<string>(type: "longtext", nullable: false)
@@ -435,8 +440,7 @@ namespace BCS.Core.Migrations
                         name: "FK_suggestionComments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_suggestionComments_suggestions_SuggestionId",
                         column: x => x.SuggestionId,
@@ -451,9 +455,9 @@ namespace BCS.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"), "18990c3c-a576-4dcb-bd16-f4d1a5e41861", "Admin", "ADMIN" },
-                    { new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"), "22c5e8c9-745c-45f1-b6a4-9df6ce41c40d", "Worker", "WORKER" },
-                    { new Guid("6cc3b719-aa10-49a0-8746-ace9486a0c3c"), "6cc3b719-aa10-49a0-8746-ace9486a0c3c", "User", "USER" }
+                    { new Guid("146e175d-121b-4c28-8a14-bcd1474589bd"), "146e175d-121b-4c28-8a14-bcd1474589bd", "Admin", "ADMIN" },
+                    { new Guid("468813b3-0fab-4d27-aa99-b79229e97ea6"), "468813b3-0fab-4d27-aa99-b79229e97ea6", "Worker", "WORKER" },
+                    { new Guid("ea002433-c6c9-4194-b763-c15ee080a648"), "ea002433-c6c9-4194-b763-c15ee080a648", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -461,8 +465,8 @@ namespace BCS.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("82a5197e-c9d5-4458-9f18-07e3c0c53a81"), 0, "bcbb091d-3274-4420-a7e0-c716fe8a443b", "vlad.dzemyuk@gmail.com", true, "Владислав Дзем'юк", false, null, "VLAD.DZEMYUK@GMAIL.COM", "VLAD.DZEMYUK@GMAIL.COM", "AQAAAAIAAYagAAAAEGK67XF1uTUSiiOnAse18HIkPckmt3JMZi3kLqP+Ccxu6CrhF4sFB+LludIiAF8elw==", null, false, "11d67fc4-ed05-4cbf-b682-8869ae647aea", false, "vlad.dzemyuk@gmail.com" },
-                    { new Guid("96c38101-a1b4-4360-8544-b40122769292"), 0, "73c60151-6779-48b1-a56c-4111f43a99da", "admin@gmail.com", true, "Власник сайту", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEvXGqJebHOhjHkMVMmM1ZWcAY02ktIc/jCMOL/DIjOd6nUoMb8whvDfU0qfTCKUZQ==", null, false, "ed8963f7-a5ac-4c0e-b111-177f4adc645f", false, "admin@gmail.com" }
+                    { new Guid("ef66a209-9640-4cce-854c-b208d1152efb"), 0, "63874f3c-d179-45a1-a2b4-387778a6bea8", "admin@gmail.com", true, "Власник сайту", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEMgg02Fry0DnLxqatd3Ew6myli2hkN88IfeHmsq72h1DF7hj+LCIssJ0ZVxnNhFtVg==", null, false, "cb8b72c8-86f7-4bc4-a081-1f2dbe2a775f", false, "admin@gmail.com" },
+                    { new Guid("f0fb5d76-f5ef-49d6-b66a-b67f79b78f8d"), 0, "b3b3e83c-3d15-486d-93d0-41e14061d918", "vlad.dzemyuk@gmail.com", true, "Владислав Дзем'юк", false, null, "VLAD.DZEMYUK@GMAIL.COM", "VLAD.DZEMYUK@GMAIL.COM", "AQAAAAIAAYagAAAAEAEvlI5OBkTuZCVWCMPYYQtVQWCtxHfTTxDvupgJ4brgNQhY9arbMQKhazPx0PXJig==", null, false, "8b03e886-3109-4036-b34f-32b046529040", false, "vlad.dzemyuk@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -470,8 +474,8 @@ namespace BCS.Core.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"), new Guid("96c38101-a1b4-4360-8544-b40122769292") },
-                    { new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"), new Guid("96c38101-a1b4-4360-8544-b40122769292") }
+                    { new Guid("146e175d-121b-4c28-8a14-bcd1474589bd"), new Guid("ef66a209-9640-4cce-854c-b208d1152efb") },
+                    { new Guid("468813b3-0fab-4d27-aa99-b79229e97ea6"), new Guid("ef66a209-9640-4cce-854c-b208d1152efb") }
                 });
 
             migrationBuilder.CreateIndex(

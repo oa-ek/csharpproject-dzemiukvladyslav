@@ -92,35 +92,35 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
+                            Id = new Guid("ef66a209-9640-4cce-854c-b208d1152efb"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73c60151-6779-48b1-a56c-4111f43a99da",
+                            ConcurrencyStamp = "63874f3c-d179-45a1-a2b4-387778a6bea8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Власник сайту",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEvXGqJebHOhjHkMVMmM1ZWcAY02ktIc/jCMOL/DIjOd6nUoMb8whvDfU0qfTCKUZQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMgg02Fry0DnLxqatd3Ew6myli2hkN88IfeHmsq72h1DF7hj+LCIssJ0ZVxnNhFtVg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed8963f7-a5ac-4c0e-b111-177f4adc645f",
+                            SecurityStamp = "cb8b72c8-86f7-4bc4-a081-1f2dbe2a775f",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = new Guid("82a5197e-c9d5-4458-9f18-07e3c0c53a81"),
+                            Id = new Guid("f0fb5d76-f5ef-49d6-b66a-b67f79b78f8d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bcbb091d-3274-4420-a7e0-c716fe8a443b",
+                            ConcurrencyStamp = "b3b3e83c-3d15-486d-93d0-41e14061d918",
                             Email = "vlad.dzemyuk@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Владислав Дзем'юк",
                             LockoutEnabled = false,
                             NormalizedEmail = "VLAD.DZEMYUK@GMAIL.COM",
                             NormalizedUserName = "VLAD.DZEMYUK@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGK67XF1uTUSiiOnAse18HIkPckmt3JMZi3kLqP+Ccxu6CrhF4sFB+LludIiAF8elw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAEvlI5OBkTuZCVWCMPYYQtVQWCtxHfTTxDvupgJ4brgNQhY9arbMQKhazPx0PXJig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "11d67fc4-ed05-4cbf-b682-8869ae647aea",
+                            SecurityStamp = "8b03e886-3109-4036-b34f-32b046529040",
                             TwoFactorEnabled = false,
                             UserName = "vlad.dzemyuk@gmail.com"
                         });
@@ -175,8 +175,12 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("TypeId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -214,8 +218,12 @@ namespace BCS.Core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -305,8 +313,12 @@ namespace BCS.Core.Migrations
                     b.Property<Guid>("TypeId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -344,8 +356,12 @@ namespace BCS.Core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -400,22 +416,22 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861"),
-                            ConcurrencyStamp = "18990c3c-a576-4dcb-bd16-f4d1a5e41861",
+                            Id = new Guid("146e175d-121b-4c28-8a14-bcd1474589bd"),
+                            ConcurrencyStamp = "146e175d-121b-4c28-8a14-bcd1474589bd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d"),
-                            ConcurrencyStamp = "22c5e8c9-745c-45f1-b6a4-9df6ce41c40d",
+                            Id = new Guid("468813b3-0fab-4d27-aa99-b79229e97ea6"),
+                            ConcurrencyStamp = "468813b3-0fab-4d27-aa99-b79229e97ea6",
                             Name = "Worker",
                             NormalizedName = "WORKER"
                         },
                         new
                         {
-                            Id = new Guid("6cc3b719-aa10-49a0-8746-ace9486a0c3c"),
-                            ConcurrencyStamp = "6cc3b719-aa10-49a0-8746-ace9486a0c3c",
+                            Id = new Guid("ea002433-c6c9-4194-b763-c15ee080a648"),
+                            ConcurrencyStamp = "ea002433-c6c9-4194-b763-c15ee080a648",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -505,13 +521,13 @@ namespace BCS.Core.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
-                            RoleId = new Guid("18990c3c-a576-4dcb-bd16-f4d1a5e41861")
+                            UserId = new Guid("ef66a209-9640-4cce-854c-b208d1152efb"),
+                            RoleId = new Guid("146e175d-121b-4c28-8a14-bcd1474589bd")
                         },
                         new
                         {
-                            UserId = new Guid("96c38101-a1b4-4360-8544-b40122769292"),
-                            RoleId = new Guid("22c5e8c9-745c-45f1-b6a4-9df6ce41c40d")
+                            UserId = new Guid("ef66a209-9640-4cce-854c-b208d1152efb"),
+                            RoleId = new Guid("468813b3-0fab-4d27-aa99-b79229e97ea6")
                         });
                 });
 
@@ -570,9 +586,7 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("Complaints")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("City");
 
@@ -597,9 +611,7 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("ComplaintCommentses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Complaint");
 
@@ -640,9 +652,7 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("Suggestions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("City");
 
@@ -667,9 +677,7 @@ namespace BCS.Core.Migrations
 
                     b.HasOne("BCS.Core.Entities.AppUser", "User")
                         .WithMany("SuggestionCommentses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Suggestion");
 
