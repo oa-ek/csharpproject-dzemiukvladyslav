@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /src/BCS.WebUI/wwwroot/data/img
 /src/BCS.WebUI/wwwroot/data/img
+/src/BCS.API/Photos

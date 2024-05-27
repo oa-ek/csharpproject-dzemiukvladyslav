@@ -2,7 +2,6 @@
 using BCS.API.Dtos;
 using BCS.Core.Entities;
 using BCS.Repositories.Cityes;
-/*using Microsoft.AspNetCore.Identity;*/
 using Microsoft.AspNetCore.Mvc;
 
 namespace BCS.API.Controllers
@@ -12,44 +11,31 @@ namespace BCS.API.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityRepository _cityRepository;
-        /*private readonly UserManager<AppUser> _userManager;*/
         private readonly IMapper _mapper;
 
         public CityController(
             ICityRepository cityRepository,
-            /*UserManager<AppUser> userManager,*/
             IMapper mapper)
         {
             _cityRepository = cityRepository;
-            /*_userManager = userManager;*/
             _mapper = mapper;
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> GetCities()
         {
             var cities = await _cityRepository.GetAllAsync();
-            return Ok(cities);
+            var cityDtos = _mapper.Map<List<CityUpdateDto>>(cities);
+            return Ok(cityDtos);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateCity([FromBody] CityCreateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             var entity = _mapper.Map<City>(model);
-            if (User.Identity.IsAuthenticated)
-            {
-                await _cityRepository.CreateAsync(entity);
-                return CreatedAtAction(nameof(GetCityById), new { id = entity.Id }, entity);
-            }
-
-            return Unauthorized();
+            await _cityRepository.CreateAsync(entity);
+            return CreatedAtAction(nameof(GetCityById), new { id = entity.Id }, entity);
         }
 
         [HttpGet("{id}")]
@@ -66,16 +52,11 @@ namespace BCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCity(Guid id, [FromBody] CityUpdateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<City>(model);
             entity.Id = id;
             await _cityRepository.UpdateAsync(entity);
 
-            return NoContent();
+            return Ok(entity);
         }
 
         [HttpDelete("{id}")]

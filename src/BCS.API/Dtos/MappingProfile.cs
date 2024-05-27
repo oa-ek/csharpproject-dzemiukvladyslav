@@ -6,30 +6,26 @@ namespace BCS.API.Dtos
     {
         public MappingProfile()
         {
-            CreateMap<TypeCreateDto, Core.Entities.Type>();
-            CreateMap<TypeUpdateDto, Core.Entities.Type>();
+            CreateMap<TypeCreateDto, Core.Entities.Type>().ReverseMap();
+            CreateMap<TypeUpdateDto, Core.Entities.Type>().ReverseMap();
 
-            CreateMap<StatusCreateDto, Core.Entities.Status>();
-            CreateMap<StatusUpdateDto, Core.Entities.Status>();
+            CreateMap<StatusCreateDto, Core.Entities.Status>().ReverseMap();
+            CreateMap<StatusUpdateDto, Core.Entities.Status>().ReverseMap();
 
-            CreateMap<CityCreateDto, Core.Entities.City>();
-            CreateMap<CityUpdateDto, Core.Entities.City>();
+            CreateMap<CityCreateDto, Core.Entities.City>().ReverseMap();
+            CreateMap<CityUpdateDto, Core.Entities.City>().ReverseMap();
 
-            CreateMap<StreetCreateDto, Core.Entities.Street>();
-            CreateMap<StreetUpdateDto, Core.Entities.Street>();
+            CreateMap<StreetCreateDto, Core.Entities.Street>().ReverseMap();
+            CreateMap<StreetUpdateDto, Core.Entities.Street>().ReverseMap();
 
-            CreateMap<StructureCreateDto, Core.Entities.Structure>();
-            CreateMap<StructureUpdateDto, Core.Entities.Structure>();
+            CreateMap<StructureCreateDto, Core.Entities.Structure>().ReverseMap();
+            CreateMap<StructureUpdateDto, Core.Entities.Structure>().ReverseMap();
 
-            CreateMap<ComplaintCreateDto, Core.Entities.Complaint>();
-            CreateMap<ComplaintUpdateDto, Core.Entities.Complaint>();
+            CreateMap<ComplaintCreateDto, Core.Entities.Complaint>().ReverseMap();
+            CreateMap<ComplaintUpdateDto, Core.Entities.Complaint>().ReverseMap();
 
-            CreateMap<SuggestionCreateDto, Core.Entities.Suggestion>();
-            CreateMap<SuggestionUpdateDto, Core.Entities.Suggestion>();
-
-            CreateMap<ComplaintCommentsCreateDto, Core.Entities.ComplaintComments>();
-
-            CreateMap<SuggestionCommentsCreateDto, Core.Entities.SuggestionComments>();
+            CreateMap<SuggestionCreateDto, Core.Entities.Suggestion>().ReverseMap();
+            CreateMap<SuggestionUpdateDto, Core.Entities.Suggestion>().ReverseMap();
         }
     }
 }

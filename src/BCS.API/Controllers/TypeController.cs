@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BCS.API.Dtos;
 using BCS.Repositories.Types;
-/*using Microsoft.AspNetCore.Identity;*/
 using Microsoft.AspNetCore.Mvc;
 
 namespace BCS.API.Controllers
@@ -11,16 +10,13 @@ namespace BCS.API.Controllers
     public class TypeController : Controller
     {
         private readonly ITypeRepository _typeRepository;
-        /*private readonly UserManager<AppUser> _userManager;*/
         private readonly IMapper _mapper;
 
         public TypeController(
             ITypeRepository typeRepository,
-            /*UserManager<AppUser> userManager,*/
             IMapper mapper)
         {
             _typeRepository = typeRepository;
-            /*_userManager = userManager;*/
             _mapper = mapper;
         }
 
@@ -28,25 +24,16 @@ namespace BCS.API.Controllers
         public async Task<IActionResult> GetTypes()
         {
             var types = await _typeRepository.GetAllAsync();
-            return Ok(types);
+            var typeDtos = _mapper.Map<List<TypeUpdateDto>>(types);
+            return Ok(typeDtos);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateType([FromBody] TypeCreateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var entity = _mapper.Map<BCS.Core.Entities.Type>(model);
-            if (User.Identity.IsAuthenticated)
-            {
-                await _typeRepository.CreateAsync(entity);
-                return CreatedAtAction(nameof(GetTypeById), new { id = entity.Id }, entity);
-            }
-
-            return Unauthorized();
+            var entity = _mapper.Map<Core.Entities.Type>(model);
+            await _typeRepository.CreateAsync(entity);
+            return CreatedAtAction(nameof(GetTypeById), new { id = entity.Id }, entity);
         }
 
         [HttpGet("{id}")]
@@ -63,16 +50,10 @@ namespace BCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateType(Guid id, [FromBody] TypeUpdateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<BCS.Core.Entities.Type>(model);
             entity.Id = id;
             await _typeRepository.UpdateAsync(entity);
-
-            return NoContent();
+            return Ok(entity);
         }
 
         [HttpDelete("{id}")]

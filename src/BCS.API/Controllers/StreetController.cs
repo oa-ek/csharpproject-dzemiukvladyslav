@@ -2,7 +2,6 @@
 using BCS.API.Dtos;
 using BCS.Core.Entities;
 using BCS.Repositories.Streets;
-/*using Microsoft.AspNetCore.Identity;*/
 using Microsoft.AspNetCore.Mvc;
 
 namespace BCS.API.Controllers
@@ -12,44 +11,30 @@ namespace BCS.API.Controllers
     public class StreetController : Controller
     {
         private readonly IStreetRepository _streetRepository;
-        /*private readonly UserManager<AppUser> _userManager;*/
         private readonly IMapper _mapper;
 
         public StreetController(
             IStreetRepository streetRepository,
-            /*UserManager<AppUser> userManager,*/
             IMapper mapper)
         {
             _streetRepository = streetRepository;
-            /*_userManager = userManager;*/
             _mapper = mapper;
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> GetStreets()
         {
             var streets = await _streetRepository.GetAllAsync();
-            return Ok(streets);
+            var streetDtos = _mapper.Map<List<StreetUpdateDto>>(streets);
+            return Ok(streetDtos);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateStreet([FromBody] StreetCreateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<Street>(model);
-            if (User.Identity.IsAuthenticated)
-            {
-                await _streetRepository.CreateAsync(entity);
-                return CreatedAtAction(nameof(GetStreetById), new { id = entity.Id }, entity);
-            }
-
-            return Unauthorized();
+            await _streetRepository.CreateAsync(entity);
+            return CreatedAtAction(nameof(GetStreetById), new { id = entity.Id }, entity);
         }
 
         [HttpGet("{id}")]
@@ -66,16 +51,10 @@ namespace BCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStreet(Guid id, [FromBody] StreetUpdateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<Street>(model);
             entity.Id = id;
             await _streetRepository.UpdateAsync(entity);
-
-            return NoContent();
+            return Ok(entity);
         }
 
         [HttpDelete("{id}")]

@@ -2,7 +2,6 @@
 using BCS.API.Dtos;
 using BCS.Core.Entities;
 using BCS.Repositories.Structures;
-/*using Microsoft.AspNetCore.Identity;*/
 using Microsoft.AspNetCore.Mvc;
 
 namespace BCS.API.Controllers
@@ -12,44 +11,30 @@ namespace BCS.API.Controllers
     public class StructureController : Controller
     {
         private readonly IStructureRepository _structureRepository;
-        /*private readonly UserManager<AppUser> _userManager;*/
         private readonly IMapper _mapper;
 
         public StructureController(
             IStructureRepository structureRepository,
-            /*UserManager<AppUser> userManager,*/
             IMapper mapper)
         {
             _structureRepository = structureRepository;
-            /*_userManager = userManager;*/
             _mapper = mapper;
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> GetStructures()
         {
             var structures = await _structureRepository.GetAllAsync();
-            return Ok(structures);
+            var structureDtos = _mapper.Map<List<StructureUpdateDto>>(structures);
+            return Ok(structureDtos);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateStructure([FromBody] StructureCreateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<Structure>(model);
-            if (User.Identity.IsAuthenticated)
-            {
-                await _structureRepository.CreateAsync(entity);
-                return CreatedAtAction(nameof(GetStructureById), new { id = entity.Id }, entity);
-            }
-
-            return Unauthorized();
+            await _structureRepository.CreateAsync(entity);
+            return CreatedAtAction(nameof(GetStructureById), new { id = entity.Id }, entity);
         }
 
         [HttpGet("{id}")]
@@ -66,16 +51,10 @@ namespace BCS.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStructure(Guid id, [FromBody] StructureUpdateDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var entity = _mapper.Map<Structure>(model);
             entity.Id = id;
             await _structureRepository.UpdateAsync(entity);
-
-            return NoContent();
+            return Ok(entity);
         }
 
         [HttpDelete("{id}")]

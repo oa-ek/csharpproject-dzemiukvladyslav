@@ -35,4 +35,8 @@
     <ProjectReference Include="..\BCS.Repositories\BCS.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Photos\" />
+  </ItemGroup>
+
 </Project>

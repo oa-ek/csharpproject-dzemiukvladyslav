@@ -1,15 +1,15 @@
 using BCS.API.Dtos;
+using BCS.API.FileService;
 using BCS.Core.Context;
 using BCS.Repositories.Cityes;
-using BCS.Repositories.ComplaintCommentses;
 using BCS.Repositories.Complaints;
 using BCS.Repositories.Statuses;
 using BCS.Repositories.Streets;
 using BCS.Repositories.Structures;
-using BCS.Repositories.SuggestionCommentses;
 using BCS.Repositories.Suggestions;
 using BCS.Repositories.Types;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,12 +35,25 @@ builder.Services.AddScoped<IComplaintRepository, ComplaintRepository>();
 builder.Services.AddScoped<ISuggestionRepository, SuggestionRepository>();
 builder.Services.AddScoped<IStructureRepository, StructureRepository>();
 builder.Services.AddScoped<IStructureRepository, StructureRepository>();
-builder.Services.AddScoped<ISuggestionCommentsRepository, SuggestionCommentsRepository>();
-builder.Services.AddScoped<IComplaintCommentsRepository, ComplaintCommentsRepository>();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
+
+var dir = Path.Combine(Directory.GetCurrentDirectory(), "Photos");
+
+if (!Directory.Exists(dir))
+{
+    Directory.CreateDirectory(dir);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(dir),
+    RequestPath = "/images"
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
