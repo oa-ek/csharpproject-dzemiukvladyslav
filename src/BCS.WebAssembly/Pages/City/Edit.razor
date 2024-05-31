@@ -1,0 +1,70 @@
+﻿@page "/city/edit/{id:guid}"
+@using AutoMapper
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject ICity CityService
+@inject IMapper _mapper
+
+<PageTitle>Редагувати обране місто</PageTitle>
+
+<EditForm Model="city" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Редагувати обране місто</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+                <input type="hidden" value="@city.Id">
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="city.Title" id="CityInput" placeholder="Нова назва міста" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-warning">Редагувати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    public CityUpdateDto city = new CityUpdateDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var result = await CityService.GetCityById(Id);
+        if (result != null)
+        {
+            city = _mapper.Map<CityUpdateDto>(result);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/city/index");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await CityService.UpdateCity(Id, city);
+        NavigationManager.NavigateTo("/city/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/city/index");
+    }
+}

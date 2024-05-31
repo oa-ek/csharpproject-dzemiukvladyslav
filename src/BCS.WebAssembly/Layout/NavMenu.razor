@@ -1,0 +1,66 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-center" href="">
+            <i class="bi bi-book-half book-color nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 9px;"></i>BCS
+        </a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Домашня сторінка
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/complaint/index">
+                <i class="bi bi-exclamation-circle nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Скарги
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/suggestion/index">
+                <i class="bi bi-lightbulb nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Пропозиції
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/type/index">
+                <i class="bi bi-tags nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Типи
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/status/index">
+                <i class="bi bi-info-circle nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Статуси
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/structure/index">
+                <i class="bi bi-building nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Міські структури
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/city/index">
+                <i class="bi bi-geo-alt nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Міста
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/street/index">
+                <i class="bi bi-signpost nav-icon" style="font-size: 20px; width: 20px; height: 20px; margin-bottom: 24px;"></i> Вулиці
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

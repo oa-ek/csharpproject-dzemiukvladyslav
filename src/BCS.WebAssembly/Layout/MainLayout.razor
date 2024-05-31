@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-3 d-flex justify-content-between align-items-center">
+            <div class="flex-grow-2 text-center">
+                <h4 class="mb-0">Книга скарг та пропозицій міській адміністрації</h4>
+            </div>
+            <div>
+                <NavLink class="nav-link" href="privacy">
+                    <i class="bi bi-shield-lock nav-icon"></i>Конфіденційність
+                </NavLink>
+            </div>
+        </div>
+
+        <article class="content px-3">
+            @Body
+        </article>
+    </main>
+</div>

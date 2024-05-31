@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCS.WebUI", "BCS.WebUI\BCS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCS.API", "BCS.API\BCS.API.csproj", "{07C9B0C8-C3EB-4D9D-B5CB-EC310C3D42CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCS.WebAssembly", "BCS.WebAssembly\BCS.WebAssembly.csproj", "{470478BF-0714-4703-A6EA-128236B95AE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCS.WebAssembly", "BCS.WebAssembly\BCS.WebAssembly.csproj", "{470478BF-0714-4703-A6EA-128236B95AE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCS.Infrastructure", "BCS.Infrastructure\BCS.Infrastructure.csproj", "{EBC4B820-FE4C-4290-BA3B-8681E4332F28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{470478BF-0714-4703-A6EA-128236B95AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{470478BF-0714-4703-A6EA-128236B95AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{470478BF-0714-4703-A6EA-128236B95AE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC4B820-FE4C-4290-BA3B-8681E4332F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC4B820-FE4C-4290-BA3B-8681E4332F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC4B820-FE4C-4290-BA3B-8681E4332F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC4B820-FE4C-4290-BA3B-8681E4332F28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -38,6 +38,13 @@ builder.Services.AddScoped<IStructureRepository, StructureRepository>();
 
 builder.Services.AddScoped<IFileService, FileService>();
 
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()
+                                                 .AllowAnyHeader()
+                                                 .AllowAnyMethod());
+});
+
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
@@ -54,6 +61,8 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(dir),
     RequestPath = "/images"
 });
+
+app.UseCors("AllowOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
