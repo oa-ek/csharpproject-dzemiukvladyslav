@@ -1,0 +1,70 @@
+﻿@page "/street/edit/{id:guid}"
+@using AutoMapper
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IStreet StreetService
+@inject IMapper _mapper
+
+<PageTitle>Редагувати обрану вулицю</PageTitle>
+
+<EditForm Model="street" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Редагувати обрану вулицю</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+                <input type="hidden" value="@street.Id">
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="street.Title" id="StreetInput" placeholder="Нова назва вулиці" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-warning">Редагувати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    public StreetUpdateDto street = new StreetUpdateDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var result = await StreetService.GetStreetById(Id);
+        if (result != null)
+        {
+            street = _mapper.Map<StreetUpdateDto>(result);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/street/index");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await StreetService.UpdateStreet(Id, street);
+        NavigationManager.NavigateTo("/street/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/street/index");
+    }
+}

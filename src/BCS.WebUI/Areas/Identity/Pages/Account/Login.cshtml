@@ -1,0 +1,86 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Вхід у систему";
+}
+
+<head>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- modernizr JS -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <div class="error-pagewrap">
+        <div class="error-page-int">
+            <div class="text-center m-b-md custom-login">
+                <h3>ВХІД У СИСТЕМУ</h3>
+                <p>Використовуйте локальний обліковий запис для входу.</p>
+            </div>
+            <div class="content-error">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 col-12">
+                                <form id="account" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                    <div class="form-group">
+                                        <label>Електронна адреса</label>
+                                        <div>
+                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" style="margin-bottom: 10px;" />
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Пароль</label>
+                                        <div>
+                                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Пароль" style="margin-bottom: 10px;" />
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox mb-3">
+                                        <div>
+                                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                                            <label class="form-check-label" asp-for="Input.RememberMe">Запам'ятати мене</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center mb-3">
+                                        <button id="login-submit" type="submit" class="btn btn-primary" style="width: 100px;">Увійти</button>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <div class="d-flex justify-content-between">
+                                            <p>
+                                                <a id="forgot-password" asp-page="./ForgotPassword" class="">Забули пароль?</a>
+                                            </p>
+                                            <p>
+                                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="">Зареєструватися</a>
+                                            </p>
+                                        </div>
+                                        <p>
+                                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="">Надіслати підтвердження електронної пошти ще раз</a>
+                                        </p>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- main JS -->
+    <script src="js/main.js"></script>
+</body>

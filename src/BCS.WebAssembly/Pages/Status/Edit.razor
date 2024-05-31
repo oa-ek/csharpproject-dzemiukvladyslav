@@ -1,0 +1,70 @@
+﻿@page "/status/edit/{id:guid}"
+@using AutoMapper
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IStatus StatusService
+@inject IMapper _mapper
+
+<PageTitle>Редагувати обраний статус</PageTitle>
+
+<EditForm Model="status" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Редагувати обраний статус</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+                <input type="hidden" value="@status.Id">
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="status.Title" id="StatusInput" placeholder="Нова назва статусу" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-warning">Редагувати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    public StatusUpdateDto status = new StatusUpdateDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var result = await StatusService.GetStatusById(Id);
+        if (result != null)
+        {
+            status = _mapper.Map<StatusUpdateDto>(result);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/status/index");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await StatusService.UpdateStatus(Id, status);
+        NavigationManager.NavigateTo("/status/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/status/index");
+    }
+}

@@ -1,0 +1,70 @@
+﻿@page "/structure/edit/{id:guid}"
+@using AutoMapper
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IStructure StructureService
+@inject IMapper _mapper
+
+<PageTitle>Редагувати обрану структуру</PageTitle>
+
+<EditForm Model="structure" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Редагувати обрану структуру</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+                <input type="hidden" value="@structure.Id">
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="structure.Title" id="StructureInput" placeholder="Нова назва структури" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-warning">Редагувати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    public StructureUpdateDto structure = new StructureUpdateDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var result = await StructureService.GetStructureById(Id);
+        if (result != null)
+        {
+            structure = _mapper.Map<StructureUpdateDto>(result);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/structure/index");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await StructureService.UpdateStructure(Id, structure);
+        NavigationManager.NavigateTo("/structure/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/structure/index");
+    }
+}

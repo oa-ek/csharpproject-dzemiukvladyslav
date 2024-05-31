@@ -1,0 +1,54 @@
+﻿@page "/status/create"
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IStatus Status
+@inject IStatus StatusService
+
+<PageTitle>Створити новий статус</PageTitle>
+<EditForm Model="status" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">Створити новий статус</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                </div>
+            </div>
+            <hr />
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="status.Title" id="StatusInput" placeholder="Назва статусу"/>        
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-primary">Створити</button>
+                </div>
+        </div>
+    </div>
+</div>
+</EditForm>
+
+
+@code {
+    public StatusCreateDto status = new StatusCreateDto();
+
+    private async Task HandleSubmit()
+    {
+        await StatusService.CreateStatus(status);
+        NavigationManager.NavigateTo("/status/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo($"/status/index");
+    }
+
+}

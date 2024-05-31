@@ -1,0 +1,54 @@
+﻿@page "/street/create"
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IStreet Street
+@inject IStreet StreetService
+
+<PageTitle>Додати нову вулицю</PageTitle>
+<EditForm Model="street" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Додати нову вулицю</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="street.Title" id="StreetInput" placeholder="Назва вулиці" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-primary">Створити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+@code {
+    public StreetCreateDto street = new StreetCreateDto();
+
+    private async Task HandleSubmit()
+    {
+        await StreetService.CreateStreet(street);
+        NavigationManager.NavigateTo("/street/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo($"/street/index");
+    }
+
+}
