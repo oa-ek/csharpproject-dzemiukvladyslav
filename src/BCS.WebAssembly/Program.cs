@@ -15,6 +15,8 @@ builder.Services.AddScoped<IType, TypeService>();
 builder.Services.AddScoped<IStructure, StructureService>();
 builder.Services.AddScoped<ICity, CityService>();
 builder.Services.AddScoped<IStreet, StreetService>();
+builder.Services.AddScoped<IComplaint, ComplaintService>();
+builder.Services.AddScoped<ISuggestion, SuggestionService>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

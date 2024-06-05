@@ -48,7 +48,7 @@ namespace BCS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetSuggestions()
         {
             var suggestions = await _suggestionRepository.GetAllAsync();
             var suggestionDtos = _mapper.Map<List<SuggestionUpdateDto>>(suggestions);
