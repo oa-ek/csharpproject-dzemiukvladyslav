@@ -1,0 +1,70 @@
+﻿@page "/type/edit/{id:guid}"
+@using AutoMapper
+@using BCS.Infrastructure.Dtos
+@using BCS.Infrastructure.Interface
+@using BCS.WebAssembly.Services
+@inject NavigationManager NavigationManager
+@inject IType TypeService
+@inject IMapper _mapper
+
+<PageTitle>Редагувати обраний тип</PageTitle>
+
+<EditForm Model="type" class="form-group" OnSubmit="HandleSubmit">
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h1 class="text-start mb-0">Редагувати обраний тип</h1>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button @onclick="Cancel" class="btn btn-outline-secondary mb-0">Скасувати</button>
+                    </div>
+                </div>
+                <hr />
+                <input type="hidden" value="@type.Id">
+
+                <div class="form-group mb-3">
+                    <label>Назва</label>
+                    <div>
+                        <InputText class="form-control" @bind-Value="type.Title" id="TypeInput" placeholder="Нова назва типу" />
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-warning">Редагувати</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+    public TypeUpdateDto type = new TypeUpdateDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var result = await TypeService.GetTypeById(Id);
+        if (result != null)
+        {
+            type = _mapper.Map<TypeUpdateDto>(result);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/type/index");
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await TypeService.UpdateType(Id, type);
+        NavigationManager.NavigateTo("/type/index");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/type/index");
+    }
+}

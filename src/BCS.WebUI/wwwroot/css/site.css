@@ -1,0 +1,98 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 899px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #f7f6f8
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    flex: 1;
+}
+
+.content {
+    padding: 20px;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.side-menu {
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    height: calc(100vh - 56px);
+    padding: 5px;
+    overflow-y: auto;
+}
+
+.navbar-toggler {
+    height: 29px;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.ComColorHead {
+    background-color: #CEEBFD;
+}
+
+.createButtons {
+    width: 200px;
+    align-content: center;
+}
+
+.icons_delete{
+    color: red;
+}
+
+.icons_edit{
+    color: darkorange;
+}
+
+.wrap{
+
+}
+
+.h_sidemenu {
+    height: 100%;
+}
+
+.pad_acord {
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.sizeMedia {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 280px;
+    height: 200px;
+}
