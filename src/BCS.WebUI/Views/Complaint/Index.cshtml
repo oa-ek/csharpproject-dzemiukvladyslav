@@ -1,0 +1,214 @@
+﻿@using BCS.Core.Entities
+@using Microsoft.AspNetCore.Identity
+@using System.Text.Json
+@model IEnumerable<BCS.Core.Entities.Complaint>
+
+@inject UserManager<AppUser> UserManager
+
+@{
+    string currentUserId = UserManager.GetUserId(User);
+}
+
+@{
+    ViewData["Title"] = "Скарги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">@ViewData["Title"]</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#filterModal"><i class="bi bi-funnel"></i></button>
+                        <a href="/complaint/create" class="btn btn-outline-primary">Додати нову скаргу</a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="filterModalLabel">Фільтр</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="get" action="/complaint/index">
+                                <div class="form-group mb-3">
+                                    <label for="type" class="form-label">Тип:</label>
+                                    <select class="form-select" id="type" name="type">
+                                        <option value="" selected>Всі</option>
+                                        @foreach (var type in ViewBag.Types)
+                                        {
+                                            <option value="@type.Value">@type.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="status" class="form-label">Статус:</label>
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="" selected>Всі</option>
+                                        @foreach (var status in ViewBag.Statuses)
+                                        {
+                                            <option value="@status.Value">@status.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="structure" class="form-label">Міська структура:</label>
+                                    <select class="form-select" id="structure" name="structure">
+                                        <option value="" selected>Всі</option>
+                                        @foreach (var structure in ViewBag.Structures)
+                                        {
+                                            <option value="@structure.Value">@structure.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="col-sm-4 form-group">
+                                        <label for="fromDate" class="col-form-label">Дата від:</label>
+                                        <input type="date" class="form-control" id="fromDate" name="fromDate">
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label for="toDate" class="col-form-label">Дата до:</label>
+                                        <input type="date" class="form-control" id="toDate" name="toDate">
+                                    </div>
+                                </div>
+                                <div class="form-group text-center mb-3">
+                                    <button type="submit" class="btn btn-outline-secondary ">Фільтрувати</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var complaint in Model)
+                {
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header ComColorHead">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><strong>@complaint.User.FullName</strong></div>
+                                    <div>@complaint.Sdatetime</div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-1 pb-1">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <strong>Структура:</strong> @complaint.Structure.Title
+                                    <strong>Тип:</strong> @complaint.Type.Title
+                                    <strong>Статус:</strong> @complaint.Status.Title
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <strong>Адреса:</strong>
+                                        <span>@complaint.City.Title</span>,
+                                        <span>@complaint.Street.Title</span>,
+                                        <span>@complaint.Number</span>
+                                    </div>
+                                    <div>
+                                        <strong>Широта: </strong>
+                                        <span>@complaint.Latitude</span>
+                                        <strong>Довгота: </strong>
+                                        <span>@complaint.Longitude</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-1 text-center">
+                                    <strong>Опис:</strong>
+                                </div>
+                                <div class="mb-1">
+                                    <span>@complaint.Text</span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(complaint.Photo))
+                                {
+
+                                    <div class="mb-1 text-center">
+                                        <strong>Фото:</strong>
+                                    </div>
+                                    <div class="mb-1 text-center">
+                                        <img src="@complaint.Photo" class="card-img-bottom rounded sizeMedia" alt="Complaint Photo" onclick="openModal('viewImageModal-@complaint.Id')">
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <a href="/complaintComments/index/@complaint.Id" class="btn btn-outline-info">Коментарі</a>
+                                    @if (complaint.UserId.ToString() == currentUserId && complaint.Status.Title != "Скасовано")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@complaint.Id" class="btn btn-outline-warning me-3">Редагувати</a>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@complaint.Id">Відхилити</button>
+                                    }
+                                    @if (complaint.UserId.ToString() == currentUserId || User.IsInRole("Admin") || User.IsInRole("Worker"))
+                                    {
+                                        <form method="post" action="/complaint/generatewordreport/@complaint.Id">
+                                            <button type="submit" class="btn btn-outline-success">Звіт Word</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var complaint in Model)
+{
+    <div class="modal fade" id="deleteModal-@complaint.Id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Відхилення скарги</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Ви впевнені, що хочете відхилити цю скаргу?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Не відхилювати</button>
+                    <form asp-action="Delete" asp-route-id="@complaint.Id" method="post">
+                        <button type="submit" class="btn btn-outline-danger">Так, відхилити!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var complaint in Model)
+{
+    <div class="modal fade" id="viewImageModal-@complaint.Id" tabindex="-1" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewImageModalLabel">Перегляд зображення</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <img src="@complaint.Photo" class="img-fluid" alt="Сomplaint Photo">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function openModal(modalId) {
+        var modal = new bootstrap.Modal(document.getElementById(modalId));
+        modal.show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var filterModal = new bootstrap.Modal(document.getElementById('filterModal'));
+    });
+</script>

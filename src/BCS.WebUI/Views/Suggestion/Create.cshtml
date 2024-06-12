@@ -1,0 +1,106 @@
+﻿@model BCS.WebUI.Dtos.SuggestionCreateDto
+
+@{
+    ViewData["Title"] = "Додати пропозицію";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">@ViewData["Title"]</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-action="Index" asp-controller="Suggestion" class="btn btn-outline-secondary mb-0">Скасувати</a>
+                </div>
+            </div>
+            <hr />
+
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Latitude" id="latitude" />
+                <input type="hidden" asp-for="Longitude" id="longitude" />
+
+                <label>Тип</label>
+                <div class="form-group mb-3">
+                    <select asp-for="TypeId" class="form-control" asp-items="ViewBag.Types"></select>
+                </div>
+
+                <label>Міська структура</label>
+                <div class="form-group mb-3">
+                    <select asp-for="StructureId" class="form-control" asp-items="ViewBag.Structures"></select>
+                </div>
+
+                <label>Опис</label>
+                <div class="form-group mb-3">
+                    <textarea asp-for="Text" class="form-control" rows="7" placeholder="Введіть текст пропозиції"></textarea>
+                </div>
+
+                <div class="form-group visually-hidden">
+                    <label asp-for="StatusId">Статус</label>
+                    <select asp-for="StatusId" class="form-control" asp-items="ViewBag.Statuses"></select>
+                </div>
+
+                <label>Місто</label>
+                <div class="form-group mb-3">
+                    <select asp-for="CityId" class="form-control" asp-items="ViewBag.Cities"></select>
+                </div>
+
+                <label>Вулиця</label>
+                <div class="form-group mb-3">
+                    <select asp-for="StreetId" class="form-control" asp-items="ViewBag.Streets"></select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Number">Номер будинку</label>
+                    <input asp-for="Number" class="form-control" placeholder="Введіть номер будинку(необов'язково)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Фото</label>
+                    <div>
+                        <input type="file" asp-for="Photo" class="form-control" />
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Геолокація</label>
+                    <div class="mb-3" id="map" style="height:500px !important"></div>
+                </div>
+
+                <div class="form-group text-center mb-3 ">
+                    <button type="submit" class="btn btn-outline-primary createButtons">Створити</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var map = L.map('map').setView([50.328, 26.522], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var marker = L.marker([50.328, 26.522], { draggable: true, opacity: 0 }).addTo(map);
+
+        function onMapClick(e) {
+            marker.setOpacity(1);
+            marker.setLatLng(e.latlng);
+            document.getElementById('latitude').value = e.latlng.lat;
+            document.getElementById('longitude').value = e.latlng.lng;
+        }
+
+        map.on('click', onMapClick);
+
+        document.getElementById('airportForm').addEventListener('submit', function (e) {
+            if (!document.getElementById('latitude').value || !document.getElementById('longitude').value) {
+                e.preventDefault();
+                alert('Please select a location on the map.');
+            }
+        });
+    </script>
+}

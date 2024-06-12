@@ -1,0 +1,190 @@
+﻿@model BCS.Core.Entities.Suggestion
+@{
+    ViewData["Title"] = "Редагувати пропозицію";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var types = ViewBag.Types as List<BCS.Core.Entities.Type>;
+    var cities = ViewBag.Cities as List<BCS.Core.Entities.City>;
+    var streets = ViewBag.Streets as List<BCS.Core.Entities.Street>;
+    var statuses = ViewBag.Statuses as List<BCS.Core.Entities.Status>;
+    var structures = ViewBag.Structures as List<BCS.Core.Entities.Structure>;
+}
+
+
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-start mb-0">@ViewData["Title"]</h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-action="Index" asp-controller="Suggestion" class="btn btn-outline-secondary mb-0">Скасувати</a>
+                </div>
+            </div>
+            <hr />
+
+            <form asp-action="Edit" asp-controller="Suggestion" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserId" />
+                <input type="hidden" asp-for="Photo" />
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Sdatetime" value="@Model.Sdatetime.ToUniversalTime()" />
+                <input type="hidden" asp-for="Latitude" id="latitude" />
+                <input type="hidden" asp-for="Longitude" id="longitude" />
+
+                <label>Тип</label>
+                <div class="form-group mb-3">
+                    <select asp-for="TypeId" class="form-control">
+                        @foreach (var type in types)
+                        {
+                            var isSelected = Model.Type.Id == type.Id;
+                            if (isSelected)
+                            {
+                                <option value="@type.Id" selected>@type.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@type.Id">@type.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="TypeId" class="text-danger"></span>
+                </div>
+
+                <label>Міська структура</label>
+                <div class="form-group mb-3">
+                    <select asp-for="StructureId" class="form-control">
+                        @foreach (var structure in structures)
+                        {
+                            var isSelected = Model.Structure.Id == structure.Id;
+                            if (isSelected)
+                            {
+                                <option value="@structure.Id" selected>@structure.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@structure.Id">@structure.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="StructureId" class="text-danger"></span>
+                </div>
+
+                <label>Опис</label>
+                <div class="form-group mb-3">
+                    <textarea asp-for="Text" class="form-control" rows="7" placeholder="Введіть текст пропозиції">@Model.Text</textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+
+
+                <label>Статус</label>
+                <div class="form-group mb-3">
+                    <select asp-for="StatusId" class="form-control">
+                        @foreach (var status in statuses)
+                        {
+                            var isSelected = Model.Status.Id == status.Id;
+                            if (isSelected)
+                            {
+                                <option value="@status.Id" selected>@status.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@status.Id">@status.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="StatusId" class="text-danger"></span>
+                </div>
+
+
+                <label>Місто</label>
+                <div class="form-group mb-3">
+                    <select asp-for="CityId" class="form-control">
+                        @foreach (var city in cities)
+                        {
+                            var isSelected = Model.City.Id == city.Id;
+                            if (isSelected)
+                            {
+                                <option value="@city.Id" selected>@city.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@city.Id">@city.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+
+
+                <label>Вулиця</label>
+                <div class="form-group mb-3">
+                    <select asp-for="StreetId" class="form-control">
+                        @foreach (var street in streets)
+                        {
+                            var isSelected = Model.Street.Id == street.Id;
+                            if (isSelected)
+                            {
+                                <option value="@street.Id" selected>@street.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@street.Id">@street.Title</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="StreetId" class="text-danger"></span>
+                </div>
+
+
+                <label>Номер будинку</label>
+                <div class="form-group mb-3">
+                    <input asp-for="Number" class="form-control" placeholder="Введіть номер будинку(необов'язково)" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+
+
+                <label>Фото</label>
+                <div class="form-group mb-3">
+                    <input id="PhotoIMG" name="PhotoIMG" type="file" class="form-control" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Геолокація</label>
+                    <div class="mb-3" id="map" style="height:500px !important"></div>
+                </div>
+
+                <div class="form-group text-center mb-3 ">
+                    <input type="submit" value="Редагувати" class="btn btn-outline-warning createButtons" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var map = L.map('map').setView([50.328, 26.522], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var marker = L.marker([@Model.Latitude, @Model.Longitude], { draggable: true }).addTo(map);
+
+        function onMapClick(e) {
+            marker.setLatLng(e.latlng);
+            document.getElementById('latitude').value = e.latlng.lat;
+            document.getElementById('longitude').value = e.latlng.lng;
+        }
+
+        map.on('click', onMapClick);
+
+        document.getElementById('airportForm').addEventListener('submit', function (e) {
+            if (!document.getElementById('latitude').value || !document.getElementById('longitude').value) {
+                e.preventDefault();
+                alert('Please select a location on the map.');
+            }
+        });
+    </script>
+}
