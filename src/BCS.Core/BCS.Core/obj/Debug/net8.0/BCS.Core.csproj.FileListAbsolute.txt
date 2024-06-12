@@ -1,0 +1,15 @@
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\bin\Debug\net8.0\BCS.Core.deps.json
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\bin\Debug\net8.0\BCS.Core.runtimeconfig.json
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\bin\Debug\net8.0\BCS.Core.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\bin\Debug\net8.0\BCS.Core.pdb
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.csproj.AssemblyReference.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.AssemblyInfoInputs.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.AssemblyInfo.cs
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.csproj.CoreCompileInputs.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.sourcelink.json
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\refint\BCS.Core.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.pdb
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\BCS.Core.genruntimeconfig.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Core\BCS.Core\obj\Debug\net8.0\ref\BCS.Core.dll

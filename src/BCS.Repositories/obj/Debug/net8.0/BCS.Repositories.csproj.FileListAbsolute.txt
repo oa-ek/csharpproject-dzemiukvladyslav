@@ -1,0 +1,16 @@
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\bin\Debug\net8.0\BCS.Repositories.deps.json
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\bin\Debug\net8.0\BCS.Repositories.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\bin\Debug\net8.0\BCS.Repositories.pdb
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\bin\Debug\net8.0\BCS.Core.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\bin\Debug\net8.0\BCS.Core.pdb
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.csproj.AssemblyReference.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.AssemblyInfoInputs.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.AssemblyInfo.cs
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.sourcelink.json
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.csproj.CopyComplete
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\refint\BCS.Repositories.dll
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\BCS.Repositories.pdb
+C:\Users\Admin\2 курс\2 семестр\Програмування на C#\csharpproject-dzemiukvladyslav\src\BCS.Repositories\obj\Debug\net8.0\ref\BCS.Repositories.dll
